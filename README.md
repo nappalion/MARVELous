@@ -48,6 +48,7 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 - [ ] UI similar to the figma page.
 - [ ] Live discussion posts.
 - [ ] User can see comic variants.
+- [ ] User can see the review and their page number under each comic cover thumbnail.
 
 ### 2. Screen Archetypes
 
