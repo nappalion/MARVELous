@@ -102,8 +102,10 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 <img src="Wireframe.PNG" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
+<img src="Digital Wireframe.PNG" width=600>
 
 ### [BONUS] Interactive Prototype
+<img src="MARVELous Walkthrough.gif" width=200>
 
 ## Schema 
 [This section will be completed in Unit 9]
