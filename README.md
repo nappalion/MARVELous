@@ -99,8 +99,7 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
       * Comic Cover Variant Screen 
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="Wireframe.PNG" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
