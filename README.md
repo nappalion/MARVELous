@@ -102,10 +102,14 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 <img src="Wireframe.PNG" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
-<img src="Digital Wireframe.PNG" width=600>
+<img src="Digital Wireframe.PNG" width=800>
 
 ### [BONUS] Interactive Prototype
-<img src="MARVELous Walkthrough.gif" width=200>
+<img src="MARVELous Walkthrough.gif" width=400>
+
+Link with Interactions:
+
+https://www.figma.com/proto/O9zBfIWDuVDtPXTtEKOKWa/Comic-Book-App?node-id=6%3A2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=6%3A2
 
 ## Schema 
 [This section will be completed in Unit 9]
