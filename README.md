@@ -112,7 +112,28 @@ Link with Interactions:
 https://www.figma.com/proto/O9zBfIWDuVDtPXTtEKOKWa/Comic-Book-App?node-id=6%3A2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=6%3A2
 
 ## Schema 
-[This section will be completed in Unit 9]
+**Models**
+
+User
+
+| Property  | Type | Description |
+| ------------- | ------------- | -------------|
+| userId | String  | unique id for the user |
+| userName | String  | unique username for the user |
+| firstName  | String  | user's first name |
+| lastName  | String  | user's last name |
+| dateCreated | DateTime  | date when account was created |
+| profilePic | File  | stores user's profile picture |
+| password  | String  | stores user's password |
+
+Favorite Comic
+| Property  | Type | Description |
+| ------------- | ------------- | -------------|
+| itemId | String | unique id for the item |
+| comidId | String | unique id for the comic |
+
+
+
 ### Models
 [Add table of models]
 ### Networking
