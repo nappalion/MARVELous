@@ -131,7 +131,7 @@ Favorite Comic
 | ------------- | ------------- | -------------|
 | itemId | String | unique id for the item |
 | comidId | String | unique id for the comic |
-| userId | String | unique id for the comic |
+| userId | String | foreign key |
 
 
 
