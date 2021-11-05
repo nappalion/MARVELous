@@ -112,31 +112,41 @@ Link with Interactions:
 https://www.figma.com/proto/O9zBfIWDuVDtPXTtEKOKWa/Comic-Book-App?node-id=6%3A2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=6%3A2
 
 ## Schema 
-**Models**
+### Models
 
 User
-
 | Property  | Type | Description |
 | ------------- | ------------- | -------------|
-| userId | String  | unique id for the user |
+| userId | int  | unique id for the user (default field) |
 | userName | String  | unique username for the user |
 | firstName  | String  | user's first name |
 | lastName  | String  | user's last name |
-| dateCreated | DateTime  | date when account was created |
+| dateCreated | DateTime  | date when account was created (default field) |
 | profilePic | File  | stores user's profile picture |
 | password  | String  | stores user's password |
 
-Favorite Comic
+User-Comic
 | Property  | Type | Description |
 | ------------- | ------------- | -------------|
-| itemId | String | unique id for the item |
-| comidId | String | unique id for the comic |
-| userId | String | foreign key |
+| objectId | String | unique id for the user-comic relationship (default field) |
+| comicId | int | Stores the unique id for each comic book to reference the API. |
+| userId | Pointer to User | Unique id for the user; used to associate each comic book with a user. |
+| isFavorite | boolean | Determines whether the user has marked this comic as their favorite. |
+| pageNumber | int | Determines which page number the user is on. |
+| status | String | Determines status of comic: Reading, Completed, On Hold, Dropped, Plan to Watch |
+| reviewNum | int | Numerical review for the comic |
+| reviewPost | String | User review for the comic |
 
+Posts (For optional Live-Discussion)
+| Property  | Type | Description |
+| ------------- | ------------- | -------------|
+| objectId | String | unique id for the user post (default field) |
+| comicId | int | Stores the unique id for each comic book to reference the API. |
+| userId | Pointer to User | Unique id for the user; used to associate each comic book with a user. |
+| description | String | Message user can send in discussion post. |
+| createdAt | DateTime | Logs the time post was sent. (default field) |
+| updatedAt | DateTime | Detects when post was updated. (default field) |
 
-
-### Models
-[Add table of models]
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
