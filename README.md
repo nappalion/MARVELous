@@ -149,5 +149,32 @@ Posts (For optional Live-Discussion)
 
 ### Networking
 - [Add list of network requests by screen ]
+
+- Home Feed Screen
+  - (Read/GET) Query all comics
+     ```swift
+     let query = PFQuery(className:"Comic")
+     query.order(byDescending: "publishedDate")
+     query.findObjectsInBackground { (comics: [PFObject]?, error: Error?) in
+        if let error = error { 
+           print(error.localizedDescription)
+        } else if let comics = comics {
+           print("Successfully retrieved \(comics.count) comics.")
+       // TODO: Do something with comics...
+        }
+     }
+     ```
+
 - [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+
+#### [OPTIONAL: List endpoints if using existing API such as Yelp]
+##### An API Of Ice And Fire
+- Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
+
+   HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /v1/public/comics | fetches lists of comics
+    `GET`    | /v1/public/comics/{comicId} | fetches a single comic by id
+    `GET`    | /v1/public/comics/{comicId}/stories   | fetches lists of stories filtered by a comic id
+    `GET`    | /v1/public/comics/{comicId}/characters | fetches lists of charactors filtered by a comic id
+    `GET`    | /v1/public/comics/{comicId}/variants | fetches a list of variant filtered by a comic id
