@@ -170,7 +170,7 @@ Posts (For optional Live-Discussion)
 
 #### [OPTIONAL: List endpoints if using existing API such as Yelp]
 ##### The API Of Marvel Developer
-- Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
+- Base URL - [https://gateway.marvel.com/](https://gateway.marvel.com/)
 
    HTTP Verb | Endpoint | Description
    ----------|----------|------------
@@ -181,7 +181,7 @@ Posts (For optional Live-Discussion)
     `GET`    | /v1/public/comics/{comicId}/variants | fetches a list of variant filtered by a comic id
 
 ##### The API Of Back4app
-- Base URL - [http(s)://parseapi.back4app.com/](http(s)://parseapi.back4app.com/)
+- Base URL - [https://parseapi.back4app.com/](https://parseapi.back4app.com/)
 
    HTTP Verb | Endpoint | Description
    ----------|----------|------------
