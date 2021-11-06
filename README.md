@@ -170,7 +170,7 @@ Posts (For optional Live-Discussion)
 
 #### [OPTIONAL: List endpoints if using existing API such as Yelp]
 ##### An API Of Ice And Fire
-- Base URL - [http(s)://gateway.marvel.com/]("http(s)://gateway.marvel.com/")
+- Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
 
    HTTP Verb | Endpoint | Description
    ----------|----------|------------
@@ -180,7 +180,7 @@ Posts (For optional Live-Discussion)
     `GET`    | /v1/public/comics/{comicId}/characters | fetches lists of charactors filtered by a comic id
     `GET`    | /v1/public/comics/{comicId}/variants | fetches a list of variant filtered by a comic id
 
-- Base URL - [http(s)://gateway.marvel.com/]("http(s)://gateway.marvel.com/")
+- Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
 
    HTTP Verb | Endpoint | Description
    ----------|----------|------------
