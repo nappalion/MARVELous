@@ -181,7 +181,7 @@ Posts (For optional Live-Discussion)
     `GET`    | /v1/public/comics/{comicId}/variants | fetches a list of variant filtered by a comic id
 
 ##### The API Of Back4app
-- Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
+- Base URL - [http(s)://parseapi.back4app.com/](http(s)://parseapi.back4app.com/)
 
    HTTP Verb | Endpoint | Description
    ----------|----------|------------
