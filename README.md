@@ -169,7 +169,7 @@ Posts (For optional Live-Discussion)
   - (Update/PUT) Update user profile image
 
 #### [OPTIONAL: List endpoints if using existing API such as Yelp]
-##### An API Of Ice And Fire
+##### The API Of Marvel Developer
 - Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
 
    HTTP Verb | Endpoint | Description
@@ -180,6 +180,7 @@ Posts (For optional Live-Discussion)
     `GET`    | /v1/public/comics/{comicId}/characters | fetches lists of charactors filtered by a comic id
     `GET`    | /v1/public/comics/{comicId}/variants | fetches a list of variant filtered by a comic id
 
+##### The API Of Back4app
 - Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
 
    HTTP Verb | Endpoint | Description
