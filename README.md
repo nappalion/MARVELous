@@ -148,10 +148,8 @@ Posts (For optional Live-Discussion)
 | updatedAt | DateTime | Detects when post was updated. (default field) |
 
 ### Networking
-- [Add list of network requests by screen ]
-
-- Home Feed Screen
-  - (Read/GET) Query all comics
+- Home Screen
+  - (Read/GET) Query new comics
      ```swift
      let query = PFQuery(className:"Comic")
      query.order(byDescending: "publishedDate")
@@ -164,8 +162,11 @@ Posts (For optional Live-Discussion)
         }
      }
      ```
-
-- [Create basic snippets for each Parse network request]
+- Create Post Screen
+  - (Create/POST) Create a new post object
+- Profile Screen
+  - (Read/GET) Query logged in user object
+  - (Update/PUT) Update user profile image
 
 #### [OPTIONAL: List endpoints if using existing API such as Yelp]
 ##### An API Of Ice And Fire
@@ -178,3 +179,11 @@ Posts (For optional Live-Discussion)
     `GET`    | /v1/public/comics/{comicId}/stories   | fetches lists of stories filtered by a comic id
     `GET`    | /v1/public/comics/{comicId}/characters | fetches lists of charactors filtered by a comic id
     `GET`    | /v1/public/comics/{comicId}/variants | fetches a list of variant filtered by a comic id
+
+- Base URL - [http(s)://gateway.marvel.com/](http(s)://gateway.marvel.com/)
+
+   HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /users | get all users
+    `GET`    | /users/?name=name| return specific user by name
+
