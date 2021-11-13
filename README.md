@@ -191,6 +191,7 @@ Posts (For optional Live-Discussion)
 ##### Sprint 1 Progress
 GIFS:
 Login Screen and Bottom Nav:
+
 <img src="LoginAndBottomNavigation.gif" width=400>
 
 Profile Fragment Progresss with Scrollable Effect and Username, profile picture, and biography:
