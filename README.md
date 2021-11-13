@@ -29,12 +29,13 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-- [ ] User can register for a new account, and this gets stored to a database for the user to log in later.
-- [ ] Bottom toolbar allows for navigation to different fragments: Home, Search, Library, Account
+- [X] User can register for a new account, and this gets stored to a database for the user to log in later.
+- [X] Bottom toolbar allows for navigation to different fragments: Home, Search, Library, Account
 - [ ] Home tab displays top rated comics and most read comics.
 - [ ] Search tab displays filters which can help the user find a specific comic.
 - [ ] Library tab displays tabs for users specific comics: Reading, Completed, On Hold, Dropped, Plan to Watch.
-- [ ] Account tab shows user info along with favorite comics. Here the reader should be able to also see settings and logout.
+- [X] Account tab shows user info.
+    - In Progress: Along with favorite comics. Here the reader should be able to also see settings and logout.      
 - [ ] User can customize their account page with a biography, profile picture, and username.
 - [ ] Users should be able to click a comic anywhere in the app and see the info of that app.
 - [ ] Users should be able to favorite a comic.
