@@ -187,4 +187,9 @@ Posts (For optional Live-Discussion)
    ----------|----------|------------
     `GET`    | /users | get all users
     `GET`    | /users/?name=name| return specific user by name
+    
+##### Sprint 1 Progress
+GIFS:
 
+Profile Fragment Progresss with Scrollable Effect and Username, profile picture, and biography:
+<img src="ProfileFragmentProgress1" width=400>
