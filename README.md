@@ -196,4 +196,8 @@ Login Screen and Bottom Nav:
 <img src="LoginAndBottomNavigation.gif" width=400>
 
 Profile Fragment Progresss with Scrollable Effect and Username, profile picture, and biography:
+
 <img src="ProfileFragmentProgress1.gif" width=400>
+
+LoginActivity with Signup and Login with Parse
+<img src="Sprint1-LoginActivity.gif" width=400>
