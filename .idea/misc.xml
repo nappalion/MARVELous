@@ -4,11 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/drawable-xxhdpi/circular_grey_bordersolid.xml" value="0.2703125" />
-        <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/drawable-xxhdpi/circularbordersolid.xml" value="0.2703125" />
+        <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/drawable-xxhdpi/circularbordersolid.xml" value="0.264" />
         <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/drawable/diagonal_background.xml" value="0.176" />
+        <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/layout/activity_login.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/layout/fragment_home.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/robjb/AndroidStudioProjects/MARVELous/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
       </map>
     </option>
   </component>
