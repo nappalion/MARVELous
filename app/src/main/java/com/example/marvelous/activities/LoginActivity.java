@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getSupportActionBar().hide();
+
         if  (ParseUser.getCurrentUser() != null){
             goMainActivity();
         }
@@ -87,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e != null){
-                    Log.e(TAG, "Issue with logIn", e);
+                    Log.e(TAG, "Issue with login", e);
                     Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_LONG).show();
                     return;
                 }
