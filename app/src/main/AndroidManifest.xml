@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.marvelous" >
+    package="com.example.marvelous">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".models.ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="MARVELous"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name="com.example.marvelous.models.ParseApplication"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.MARVELous" >
+        android:theme="@style/Theme.MARVELous"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.SignupActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SignupActivity1"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -22,10 +28,11 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/fileprovider"></meta-data>
+                android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name="com.example.marvelous.activities.LoginActivity"
+        <activity
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,9 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.marvelous.activities.MainActivity">
-        </activity>
+        <activity android:name=".activities.MainActivity" />
     </application>
 
 </manifest>

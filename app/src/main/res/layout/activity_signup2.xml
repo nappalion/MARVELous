@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SignupActivity1">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="70sp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"
+        app:counterEnabled="true"
+        app:counterMaxLength="150"
+        app:hintEnabled="false"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <EditText
+            android:id="@+id/etBio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/text_bubble"
+            android:layout_weight="1"
+            android:gravity="top|left"
+            android:hint="Add your bio here."
+            android:padding="30sp"
+            android:maxLength="160"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvAddProfile"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textContainer"
+        android:layout_marginTop="5sp"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:text="Tell us about yourself."
+        android:gravity="center"
+        android:textColor="@color/black" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:layout_marginRight="120sp"
+        android:layout_marginLeft="120sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tvAddProfile"
+        android:text="Continue"
+        android:textSize="15sp"
+        android:minHeight="0dp"
+        android:background="@drawable/login_button"
+        android:textStyle="bold"
+        android:textColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/ivSignupBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        android:elevation="-1dp"
+        android:src="@drawable/signup_background" />
+</RelativeLayout>

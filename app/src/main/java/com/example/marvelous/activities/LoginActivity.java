@@ -71,13 +71,13 @@ public class LoginActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     // Hooray! Let them use the app now.
-                    goMainActivity();
+                    goSignupActivity1();
                     Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong
                     Log.e(TAG, "Issue with Signup", e);
-                    Toast.makeText(LoginActivity.this, "Issue with Signup", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Issue with Signup", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -90,13 +90,19 @@ public class LoginActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (e != null){
                     Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Issue with login", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 goMainActivity();
                 Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void goSignupActivity1() {
+        Intent i = new Intent(this, SignupActivity1.class);
+        startActivity(i);
+        finish();
     }
 
     private void goMainActivity() {
