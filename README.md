@@ -200,4 +200,5 @@ Profile Fragment Progresss with Scrollable Effect and Username, profile picture,
 <img src="ProfileFragmentProgress1.gif" width=400>
 
 LoginActivity with Signup and Login with Parse
+
 <img src="Sprint1-LoginActivity.gif" width=400>
