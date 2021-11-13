@@ -192,4 +192,4 @@ Posts (For optional Live-Discussion)
 GIFS:
 
 Profile Fragment Progresss with Scrollable Effect and Username, profile picture, and biography:
-<img src="ProfileFragmentProgress1" width=400>
+<img src="ProfileFragmentProgress1.gif" width=400>
