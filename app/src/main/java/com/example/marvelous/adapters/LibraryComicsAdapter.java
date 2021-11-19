@@ -1,38 +1,59 @@
 package com.example.marvelous.adapters;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.marvelous.R;
 import com.example.marvelous.models.UserComic;
+import com.parse.ParseFile;
 
 import java.util.List;
 
 public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdapter.ViewHolder> {
 
     private List<UserComic> mUserComics;
+    Context context;
+    public static final String TAG = "LibraryComicsAdapter";
 
-    public LibraryComicsAdapter(List<UserComic> userComics) {
+    public LibraryComicsAdapter(List<UserComic> userComics, Context mContext) {
+        Log.i(TAG, "LibraryComicsAdapter Constructor");
         this.mUserComics = userComics;
+        this.context = mContext;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+
+        Log.i(TAG, String.valueOf(mUserComics.size()));
+
+        // Inflate the LibraryComics item layout
+        View libraryView = inflater.inflate(R.layout.item_librarycomics, parent, false);
+
+        // Return a new holder instance
+        ViewHolder viewHolder = new ViewHolder(libraryView);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get the data model based on position
-        UserComic usercomic = mUserComics.get(position);
+        UserComic userComic = mUserComics.get(position);
 
         // set item views based on views in data model
+        holder.bind(userComic);
     }
 
     @Override
@@ -42,16 +63,26 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvStatus;
-        public RecyclerView rvComics;
-        public ImageView ivArrow;
+        public ImageView ivComic;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tvStatus = itemView.findViewById(R.id.tvStatus);
-            rvComics = itemView.findViewById(R.id.rvComics);
-            ivArrow = itemView.findViewById(R.id.ivArrow);
+            ivComic = itemView.findViewById(R.id.ivComic);
+        }
+
+        public void bind(UserComic userComic) {
+            ParseFile sampleImage = userComic.getSampleImage();
+            Log.i(TAG, "Bind called");
+            if (sampleImage != null) {
+                Glide.with(context).load(sampleImage.getUrl()).into(ivComic);
+                Log.i(TAG, "ivComic");
+            }
+            else {
+                Log.i(TAG, "No sample image!");
+            }
+
+            // Add OnClickListener for each ivComic
         }
     }
 }

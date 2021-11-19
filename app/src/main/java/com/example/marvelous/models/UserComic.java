@@ -1,6 +1,9 @@
 package com.example.marvelous.models;
 
+import android.graphics.Bitmap;
+
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -15,6 +18,7 @@ public class UserComic extends ParseObject {
     public static final String KEY_STATUS = "status";
     public static final String KEY_REVIEWNUM = "reviewNum";
     public static final String KEY_REVIEWPOST = "reviewPost";
+    public static final String KEY_SAMPLEIMAGE = "sampleImage";
 
     public String getComicId() {
         return getString(KEY_COMICID);
@@ -24,8 +28,8 @@ public class UserComic extends ParseObject {
         put(KEY_COMICID, comicId);
     }
 
-    public String getUserId() {
-        return getString(KEY_USERID);
+    public ParseUser getUserId() {
+        return getParseUser(KEY_USERID);
     }
 
     public void setUserId(ParseUser userId) {
@@ -70,5 +74,13 @@ public class UserComic extends ParseObject {
 
     public void setReviewPost(String reviewPost) {
         put(KEY_REVIEWPOST, reviewPost);
+    }
+
+    public ParseFile getSampleImage() {
+        return getParseFile(KEY_SAMPLEIMAGE);
+    }
+
+    public void setSampleImage(ParseFile sampleImage) {
+        put(KEY_SAMPLEIMAGE, sampleImage);
     }
 }
