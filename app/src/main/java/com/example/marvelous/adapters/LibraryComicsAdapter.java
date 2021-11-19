@@ -1,7 +1,5 @@
 package com.example.marvelous.adapters;
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,40 +13,31 @@ import com.example.marvelous.models.UserComic;
 
 import java.util.List;
 
-public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHolder> {
+public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdapter.ViewHolder> {
 
-    private List<String> mPossStatuses;
+    private List<UserComic> mUserComics;
 
-    public LibraryAdapter(List<String> possStatus) {
-        this.mPossStatuses = possStatus;
+    public LibraryComicsAdapter(List<UserComic> userComics) {
+        this.mUserComics = userComics;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        // Inflate the custom layout
-        View libraryView = inflater.inflate(R.layout.item_library, parent, false);
-
-        // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(libraryView);
-        return viewHolder;
+        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // get the data model based on position
-        String possStatus = mPossStatuses.get(position);
+        UserComic usercomic = mUserComics.get(position);
 
         // set item views based on views in data model
-        holder.bind(possStatus);
     }
 
     @Override
     public int getItemCount() {
-        return mPossStatuses.size();
+        return mUserComics.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,12 +52,6 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
             tvStatus = itemView.findViewById(R.id.tvStatus);
             rvComics = itemView.findViewById(R.id.rvComics);
             ivArrow = itemView.findViewById(R.id.ivArrow);
-        }
-
-        // Update the view inside of the view holder with this data
-        public void bind(String possStatus) {
-            // Setting text for status
-            tvStatus.setText(possStatus);
         }
     }
 }
