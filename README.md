@@ -207,5 +207,6 @@ LoginActivity with Signup and Login with Parse
 GIFS:
 
 Settings Activity with Preferences Fragment: 
+
 <img src="Sprint2-SettingsActivity.gif" width=400>
 
