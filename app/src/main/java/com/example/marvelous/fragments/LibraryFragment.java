@@ -45,7 +45,7 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onItemClicked(int position) {
                 // expand the RecyclerView
-                Toast.makeText( getContext(), "Expand View", Toast.LENGTH_SHORT).show();
+                // Toast.makeText( getContext(), "Expand View", Toast.LENGTH_SHORT).show();
             }
         };
 

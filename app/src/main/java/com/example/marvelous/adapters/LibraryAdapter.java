@@ -58,7 +58,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Log.i(TAG, "LibraryAdapter onBindViewHolder called.");
+        // Log.i(TAG, "LibraryAdapter onBindViewHolder called.");
 
         // get the data model based on position
         String possStatus = mPossStatuses.get(position);
@@ -135,6 +135,17 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
                 @Override
                 public void onClick(View v) {
                     clickListener.onItemClicked(getAdapterPosition());
+
+                    // expand/collapse RV when clicked
+                    if (rvComics.getVisibility() == View.VISIBLE) {
+                        rvComics.setVisibility(View.GONE);
+                        ivArrow.setImageResource(R.drawable.arrow_up);
+                    }
+                    else
+                    {
+                        rvComics.setVisibility(View.VISIBLE);
+                        ivArrow.setImageResource(R.drawable.arrow_down);
+                    }
                 }
             });
         }
