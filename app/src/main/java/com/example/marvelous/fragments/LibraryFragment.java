@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.marvelous.R;
+import com.example.marvelous.activities.MainActivity;
 import com.example.marvelous.adapters.LibraryAdapter;
 import com.example.marvelous.models.UserComic;
 import com.parse.FindCallback;
@@ -34,6 +35,7 @@ public class LibraryFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         possStatuses = new ArrayList<>();
         possStatuses.add("Reading");
         possStatuses.add("Completed");
