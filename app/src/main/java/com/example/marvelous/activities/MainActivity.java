@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private MenuItem mitLogout;
+    private MenuItem mitAdd;
     private BottomNavigationView bottomNavigationView;
+    private int menuToChoose = R.menu.menu_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         int result = RESULT_OK;
 
         mitLogout = findViewById(R.id.mitLogout);
+        mitAdd = findViewById(R.id.mitAdd);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
@@ -45,19 +49,24 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         //Toast.makeText(MainActivity.this , "Home", Toast.LENGTH_SHORT).show();
+                        changeActionBar(R.menu.menu_main, "MARVELous");
                         fragment = new HomeFragment();
                         break;
                     case R.id.action_search:
                         //Toast.makeText(MainActivity.this, "Compose", Toast.LENGTH_SHORT).show();
+                        changeActionBar(R.menu.menu_main, "MARVELous");
                         fragment = new SearchFragment();
                         break;
                     case R.id.action_library:
                         //Toast.makeText(MainActivity.this, "Compose", Toast.LENGTH_SHORT).show();
+                        changeActionBar(R.menu.menu_library, "My Library");
+                        invalidateOptionsMenu();
                         fragment = new LibraryFragment();
                         break;
                     case R.id.action_profile:
                     default:
                         //Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                        changeActionBar(R.menu.menu_main, "MARVELous");
                         fragment = new ProfileFragment();
                         break;
                 }
@@ -69,10 +78,16 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
+    public void changeActionBar(int menu, String title) {
+        menuToChoose = menu;
+        getSupportActionBar().setTitle(title);
+        invalidateOptionsMenu();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(menuToChoose, menu);
         return true;
     }
 
@@ -84,7 +99,14 @@ public class MainActivity extends AppCompatActivity {
             goLoginActivity();
             return true;
         }
+
+        if (item.getItemId() == R.id.mitAdd) {
+            Toast.makeText(MainActivity.this, "Add Item!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+
+
     }
 
     private void goLoginActivity() {
