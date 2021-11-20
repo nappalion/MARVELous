@@ -212,5 +212,5 @@ Settings Activity with Preferences Fragment:
 
 Library Fragment Progress: 
 
-<img src="Sprint2-LibraryFragment.gif" width=400>
+<img src="Sprint2-LibraryActivity.gif" width=400>
 
