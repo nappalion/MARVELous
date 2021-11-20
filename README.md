@@ -206,3 +206,6 @@ LoginActivity with Signup and Login with Parse
 ##### Sprint 2 Progress
 GIFS:
 
+Settings Activity with Preferences Fragment: 
+<img src="Sprint2-SettingsActivity.gif" width=400>
+
