@@ -20,8 +20,8 @@ public class UserComic extends ParseObject {
     public static final String KEY_REVIEWPOST = "reviewPost";
     public static final String KEY_SAMPLEIMAGE = "sampleImage";
 
-    public String getComicId() {
-        return getString(KEY_COMICID);
+    public int getComicId() {
+        return getInt(KEY_COMICID);
     }
 
     public void setComicId(int comicId) {

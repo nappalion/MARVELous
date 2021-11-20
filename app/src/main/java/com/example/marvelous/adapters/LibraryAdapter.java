@@ -35,9 +35,10 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
     private List<String> mPossStatuses;
     OnClickListener clickListener;
 
-    public LibraryAdapter(List<String> possStatus, OnClickListener clickListener) {
+    public LibraryAdapter(List<String> possStatus, Context context, OnClickListener clickListener) {
         this.mPossStatuses = possStatus;
         this.clickListener = clickListener;
+        this.context = context;
     }
 
     @NonNull
@@ -57,6 +58,8 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        Log.i(TAG, "LibraryAdapter onBindViewHolder called.");
+
         // get the data model based on position
         String possStatus = mPossStatuses.get(position);
 
@@ -66,6 +69,10 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
         holder.rvComics.setHasFixedSize(true);
 
         List<UserComic> userComics = new ArrayList<>();
+
+        // Attach LibraryComicsAdapter to RV
+        LibraryComicsAdapter libraryComicsAdapter = new LibraryComicsAdapter(userComics, holder.rvComics.getContext());
+        holder.rvComics.setAdapter(libraryComicsAdapter);
 
         // Query for all the UserComic for the current user
         ParseQuery<UserComic> query = ParseQuery.getQuery(UserComic.class);
@@ -86,15 +93,15 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
                 } else {
                     Log.d(TAG, "Issue with getting comics.");
                 }
+
+                // set item views based on views in data model
+                holder.bind(possStatus);
+
+                libraryComicsAdapter.notifyDataSetChanged();
+                Log.i(TAG, "Size of userComics: " + String.valueOf(userComics.size()));
             }
         });
 
-        // set item views based on views in data model
-        holder.bind(possStatus);
-
-        // Attach LibraryComicsAdapter to RV
-        LibraryComicsAdapter libraryComicsAdapter = new LibraryComicsAdapter(userComics, holder.rvComics.getContext());
-        holder.rvComics.setAdapter(libraryComicsAdapter);
     }
 
     @Override

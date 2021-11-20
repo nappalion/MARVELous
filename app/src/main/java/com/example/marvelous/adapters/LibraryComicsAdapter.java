@@ -26,9 +26,9 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
     public static final String TAG = "LibraryComicsAdapter";
 
     public LibraryComicsAdapter(List<UserComic> userComics, Context mContext) {
-        Log.i(TAG, "LibraryComicsAdapter Constructor");
         this.mUserComics = userComics;
         this.context = mContext;
+        // Log.i(TAG, "Constructor called: " + String.valueOf(mUserComics.size()));
     }
 
     @NonNull
@@ -37,7 +37,8 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        Log.i(TAG, String.valueOf(mUserComics.size()));
+        // Log.i(TAG, "onCreateViewHolder called");
+        // Log.i(TAG, String.valueOf(mUserComics.size()));
 
         // Inflate the LibraryComics item layout
         View libraryView = inflater.inflate(R.layout.item_librarycomics, parent, false);
@@ -48,16 +49,19 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder childHolder, int position) {
+
+        // Log.i(TAG, "onBindViewHolder called");
         // get the data model based on position
         UserComic userComic = mUserComics.get(position);
 
         // set item views based on views in data model
-        holder.bind(userComic);
+        childHolder.bind(userComic);
     }
 
     @Override
     public int getItemCount() {
+        // Log.i(TAG, "getItemCount called: " + String.valueOf(mUserComics.size()));
         return mUserComics.size();
     }
 
@@ -73,7 +77,7 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
 
         public void bind(UserComic userComic) {
             ParseFile sampleImage = userComic.getSampleImage();
-            Log.i(TAG, "Bind called");
+            // Log.i(TAG, "Bind called");
             if (sampleImage != null) {
                 Glide.with(context).load(sampleImage.getUrl()).into(ivComic);
                 Log.i(TAG, "ivComic");

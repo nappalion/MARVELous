@@ -49,7 +49,7 @@ public class LibraryFragment extends Fragment {
             }
         };
 
-        libraryAdapter = new LibraryAdapter(possStatuses, onClickListener);
+        libraryAdapter = new LibraryAdapter(possStatuses, getContext(), onClickListener);
     }
 
     @Nullable
