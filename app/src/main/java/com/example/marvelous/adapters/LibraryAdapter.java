@@ -85,7 +85,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
                     // Access the array of results here
                     for (UserComic comic: comics) {
                         if (comic.getStatus().equals(possStatus)) {
-                            Log.i(TAG, comic.getStatus() + " - is equal to - " + possStatus);
+                            // Log.i(TAG, comic.getStatus() + " - is equal to - " + possStatus);
                             // adds specific comic in specific row
                             userComics.add(comic);
                         }
@@ -98,7 +98,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.ViewHold
                 holder.bind(possStatus);
 
                 libraryComicsAdapter.notifyDataSetChanged();
-                Log.i(TAG, "Size of userComics: " + String.valueOf(userComics.size()));
+                // Log.i(TAG, "Size of userComics: " + String.valueOf(userComics.size()));
             }
         });
 

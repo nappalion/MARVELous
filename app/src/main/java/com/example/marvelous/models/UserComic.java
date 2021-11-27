@@ -19,6 +19,7 @@ public class UserComic extends ParseObject {
     public static final String KEY_REVIEWNUM = "reviewNum";
     public static final String KEY_REVIEWPOST = "reviewPost";
     public static final String KEY_SAMPLEIMAGE = "sampleImage";
+    public static final String KEY_TOTALPAGES = "totalPages";
 
     public int getComicId() {
         return getInt(KEY_COMICID);
@@ -44,8 +45,8 @@ public class UserComic extends ParseObject {
         put(KEY_ISFAVORITE, isFavorite);
     }
 
-    public String getPageNumber() {
-        return getString(KEY_PAGENUMBER);
+    public int getPageNumber() {
+        return getInt(KEY_PAGENUMBER);
     }
 
     public void setPageNumber(int pageNumber) {
@@ -60,8 +61,8 @@ public class UserComic extends ParseObject {
         put(KEY_STATUS, status);
     }
 
-    public String getReviewNum() {
-        return getString(KEY_REVIEWNUM);
+    public int getReviewNum() {
+        return getInt(KEY_REVIEWNUM);
     }
 
     public void setReviewNum(int reviewNum) {
@@ -82,5 +83,13 @@ public class UserComic extends ParseObject {
 
     public void setSampleImage(ParseFile sampleImage) {
         put(KEY_SAMPLEIMAGE, sampleImage);
+    }
+
+    public int getTotalPages() {
+        return getInt(KEY_TOTALPAGES);
+    }
+
+    public void setTotalPages(int totalPages) {
+        put(KEY_TOTALPAGES, totalPages);
     }
 }
