@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:textColor="#B13333"
+        android:title="Account">
+
+        <EditTextPreference
+            android:key="etUsername"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Change user name"
+            android:title="Username"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:inputType="textPassword"
+            android:key="etPassword"
+            android:selectAllOnFocus="false"
+            android:singleLine="false"
+            android:summary="Change user password"
+            android:title="Password"
+            app:iconSpaceReserved="false" />
+        <EditTextPreference
+            android:key="etBio"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Update user biography"
+            android:title="Bio"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:key="editPfP"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Change user profile picture"
+            android:title="Profile Photo"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:textColor="#B13333"
+        android:title="About">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            android:summary="We are a group of student developers creating an app for Codepath. This app was created to allow for a social community of comic lovers." />
+        <Preference
+            app:iconSpaceReserved="false"
+            android:summary="1.0.0"
+            android:title="Version" />
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

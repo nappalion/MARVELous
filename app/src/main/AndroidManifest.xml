@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MARVELous"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.SettingsActivity"
+            android:label="Settings"
+            android:theme="@style/PreferenceScreen"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity"/>
+        </activity>
+
         <activity
             android:name=".activities.SignupActivity2"
             android:exported="false" />
