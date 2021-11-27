@@ -226,3 +226,8 @@ Account Page Completion and Search Fragment Progress:
 
 <img src="Sprint3-ProfileFragmentComplete_SearchFragmentProgress.gif" width=400>
 
+Comic Detail Progress:
+
+<img src="Sprint3-ComicDetailProgress.png" width=400>
+
+
