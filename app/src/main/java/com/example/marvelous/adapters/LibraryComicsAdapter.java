@@ -96,4 +96,9 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
             });
         }
     }
+
+    public void clear() {
+        mUserComics.clear();
+        notifyDataSetChanged();
+    }
 }

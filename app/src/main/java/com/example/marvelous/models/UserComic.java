@@ -36,8 +36,8 @@ public class UserComic extends ParseObject {
         put(KEY_USERID, userId);
     }
 
-    public String getIsFavorite() {
-        return getString(KEY_ISFAVORITE);
+    public boolean getIsFavorite() {
+        return getBoolean(KEY_ISFAVORITE);
     }
 
     public void setIsFavorite(boolean isFavorite) {

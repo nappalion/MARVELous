@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         //Toast.makeText(MainActivity.this , "Home", Toast.LENGTH_SHORT).show();
-                        changeActionBar(R.menu.menu_main, "MARVELous");
+                        changeActionBar(R.menu.menu_main, "Home");
                         fragment = new HomeFragment();
                         break;
                     case R.id.action_search:
                         //Toast.makeText(MainActivity.this, "Compose", Toast.LENGTH_SHORT).show();
-                        changeActionBar(R.menu.menu_main, "MARVELous");
+                        changeActionBar(R.menu.menu_main, "Search");
                         fragment = new SearchFragment();
                         break;
                     case R.id.action_library:
@@ -97,6 +97,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Logged out!", Toast.LENGTH_SHORT).show();
             ParseUser.logOut();
             goLoginActivity();
+            return true;
+        }
+
+        if (item.getItemId() == R.id.mitSettings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
