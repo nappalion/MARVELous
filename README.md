@@ -1,4 +1,4 @@
-Original App Design Project - README Template
+Original App Design Project - README 
 ===
 
 Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
@@ -217,3 +217,11 @@ Library Fragment Progress:
 
 ##### Sprint 3 Progress
 GIFS:
+
+Sign Up Activity Progress with Email and Sign Up Page:
+
+<img src="Sprint3-SignupActivityProgress.gif" width=400>
+
+Account Page Completion and Search Fragment Progress:
+<img src="Sprint3-ProfileFragmentComplete_SearchFragmentProgress" width=400>
+
