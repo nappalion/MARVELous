@@ -12,6 +12,7 @@ public class ParseApplication extends Application {
 
         //Register your parse models
         ParseObject.registerSubclass(Comic.class);
+        ParseObject.registerSubclass(UserComic.class);
 
         //set applicationID and sever
         Parse.initialize(new Parse.Configuration.Builder(this)

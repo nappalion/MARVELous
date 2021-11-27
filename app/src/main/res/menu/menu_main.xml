@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mitSettings"
+        android:icon="@drawable/media_option_button"
+        android:title="Settings"
+        app:showAsAction="collapseActionView" />
+    <item
         android:id="@+id/mitLogout"
         android:icon="@drawable/media_option_button"
         android:title="Logout"

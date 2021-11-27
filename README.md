@@ -33,10 +33,10 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 - [X] Bottom toolbar allows for navigation to different fragments: Home, Search, Library, Account
 - [ ] Home tab displays top rated comics and most read comics.
 - [ ] Search tab displays filters which can help the user find a specific comic.
-- [ ] Library tab displays tabs for users specific comics: Reading, Completed, On Hold, Dropped, Plan to Watch.
+- [X] Library tab displays tabs for users specific comics: Reading, Completed, On Hold, Dropped, Plan to Watch.
 - [X] Account tab shows user info.
-    - In Progress: Along with favorite comics. Here the reader should be able to also see settings and logout.      
-- [ ] User can customize their account page with a biography, profile picture, and username.
+    - In Progress: favorite comics.
+- [X] User can customize their account page with a biography, profile picture, and username.
 - [ ] Users should be able to click a comic anywhere in the app and see the info of that app.
 - [ ] Users should be able to favorite a comic.
 
@@ -202,3 +202,15 @@ Profile Fragment Progresss with Scrollable Effect and Username, profile picture,
 LoginActivity with Signup and Login with Parse
 
 <img src="Sprint1-LoginActivity.gif" width=400>
+
+##### Sprint 2 Progress
+GIFS:
+
+Settings Activity with Preferences Fragment: 
+
+<img src="Sprint2-SettingsActivity.gif" width=400>
+
+Library Fragment Progress: 
+
+<img src="Sprint2-LibraryActivity.gif" width=400>
+
