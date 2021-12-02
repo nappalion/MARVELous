@@ -2,11 +2,13 @@ package com.example.marvelous.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_search:
                         //Toast.makeText(MainActivity.this, "Compose", Toast.LENGTH_SHORT).show();
-                        changeActionBar(R.menu.menu_main, "Search");
+                        changeActionBar(R.menu.menu_search, "Search");
                         fragment = new SearchFragment();
                         break;
                     case R.id.action_library:
@@ -111,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-
-
     }
 
     private void goLoginActivity() {
