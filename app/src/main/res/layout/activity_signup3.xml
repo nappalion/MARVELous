@@ -6,27 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".activities.SignupActivity2">
 
-    <ImageButton
-        android:id="@+id/btnProfile"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/create_profile_pic"
-        android:layout_marginTop="100sp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:background="@color/transparent" />
+        android:layout_marginTop="70sp"
+        android:layout_marginLeft="15sp"
+        android:layout_marginRight="15sp"
+        app:counterEnabled="true"
+        app:counterMaxLength="150"
+        app:hintEnabled="false"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp">
+
+        <EditText
+            android:id="@+id/etBio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/text_bubble"
+            android:layout_weight="1"
+            android:gravity="top|left"
+            android:hint="Add your bio here."
+            android:padding="30sp"
+            android:maxLength="160"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tvAddProfile"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnProfile"
+        android:layout_below="@id/textContainer"
         android:layout_marginTop="5sp"
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
-        android:text="Add a profile picture."
+        android:text="Tell us about yourself."
         android:gravity="center"
         android:textColor="@color/black" />
 

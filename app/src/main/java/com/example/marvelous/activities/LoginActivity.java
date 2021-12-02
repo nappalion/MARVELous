@@ -52,14 +52,18 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
                 Log.i(TAG, "onClick Signup button");
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                signupUser(username, password);
+                signupUser(username, password); */
+                String username = etUsername.getText().toString();
+                goSignupActivity1(username);
             }
         });
     }
 
+    /*
     private void signupUser(String username, String password) {
         Log.i(TAG, "Attempting to signup user " + username);
         // Create the ParseUser
@@ -81,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+    } */
 
     private void loginUser(String username, String password) {
         Log.i(TAG, "Attempting to login user " + username);
@@ -99,10 +103,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goSignupActivity1() {
+    private void goSignupActivity1(String username) {
         Intent i = new Intent(this, SignupActivity1.class);
+        i.putExtra("username", username);
         startActivity(i);
-        finish();
     }
 
     private void goMainActivity() {

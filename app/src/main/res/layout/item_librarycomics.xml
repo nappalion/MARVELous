@@ -1,15 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginRight="5sp">
 
-    <ImageView
-        android:id="@+id/ivComic"
+    <LinearLayout
+        android:id="@+id/comicContainer"
         android:layout_width="wrap_content"
-        android:layout_height="200sp"
-        android:layout_margin="10sp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/test_comic" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/library_status_shape"
+        android:layout_margin="1dp"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivComic"
+            android:layout_width="wrap_content"
+            android:layout_height="200sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginBottom="0sp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/test_comic" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5sp">
+
+            <ImageView
+                android:id="@+id/ivStar"
+                android:layout_width="wrap_content"
+                android:layout_height="25sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icon_star"/>
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2sp"
+                android:textSize="15sp"
+                tools:text="3.23" />'
+            <ImageView
+                android:id="@+id/ivBookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="25sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icon_bookmark" />
+            <TextView
+                android:id="@+id/tvBookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:lines="1"
+                tools:text="4/237" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
