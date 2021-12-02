@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
     android:orientation="vertical">
 
     <TextView
@@ -22,16 +21,17 @@
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="196dp"
-        android:layout_height="222dp"
+        android:layout_width="125dp"
+        android:layout_height="175dp"
         android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@android:drawable/btn_default_small"
+        tools:srcCompat="@android:drawable/btn_default_small" />
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="188dp"
-        android:layout_height="181dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvComicname"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="5dp"
