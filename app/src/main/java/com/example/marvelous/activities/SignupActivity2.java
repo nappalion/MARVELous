@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.marvelous.R;
 
 public class SignupActivity2 extends AppCompatActivity {
 
-
+    ImageButton btnProfile;
     Button btnContinue;
-    EditText etBio;
-    String bio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +24,29 @@ public class SignupActivity2 extends AppCompatActivity {
         getSupportActionBar().hide();
 
         btnContinue = findViewById(R.id.btnContinue);
-        etBio = findViewById(R.id.etBio);
+        btnProfile = findViewById(R.id.btnProfile);
 
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bio = etBio.getText().toString();
-                goMainActivity();
+                // set profile to back4app user
+                goSignupActivity3();
+            }
+        });
+
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SignupActivity2.this , "Add profile picture.", Toast.LENGTH_SHORT).show();
+                // set up adding user profile
             }
         });
     }
 
-    private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+
+
+    private void goSignupActivity3() {
+        Intent i = new Intent(this, SignupActivity3.class);
         startActivity(i);
         finish();
     }

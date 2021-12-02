@@ -8,7 +8,8 @@
         android:id="@+id/libContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/library_status_shape"
+        android:background="@drawable/circularbordersolid"
+        android:elevation="10sp"
         android:layout_margin="10sp"
         android:padding="20sp"
         android:orientation="vertical">

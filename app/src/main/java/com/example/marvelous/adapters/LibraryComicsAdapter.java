@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.example.marvelous.R;
 import com.example.marvelous.models.UserComic;
 import com.parse.ParseFile;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdapter.ViewHolder> {
@@ -69,11 +71,17 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivComic;
+        public LinearLayout comicContainer;
+        public TextView tvRating;
+        public TextView tvBookmark;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             ivComic = itemView.findViewById(R.id.ivComic);
+            comicContainer = itemView.findViewById(R.id.comicContainer);
+            tvRating = itemView.findViewById(R.id.tvRating);
+            tvBookmark = itemView.findViewById(R.id.tvBookmark);
         }
 
         public void bind(UserComic userComic) {
@@ -81,14 +89,23 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
             // Log.i(TAG, "Bind called");
             if (sampleImage != null) {
                 Glide.with(context).load(sampleImage.getUrl()).into(ivComic);
-                Log.i(TAG, "ivComic");
+                // Log.i(TAG, "ivComic");
             }
             else {
                 Log.i(TAG, "No sample image!");
             }
 
+            // Log.i(TAG, userComic.getReviewNum().toString());
+            // Makes tvRating follow 0.0 format
+            DecimalFormat df = new DecimalFormat("0.0");
+            tvRating.setText(df.format(userComic.getReviewNum()));
+
+            String bookmark = userComic.getPageNumber()
+                                + "/" + userComic.getTotalPages();
+            tvBookmark.setText(bookmark);
+
             // Add OnClickListener for each ivComic
-            ivComic.setOnClickListener(new View.OnClickListener() {
+            comicContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText( v.getContext(), "Comic Id: " + String.valueOf(userComic.getComicId()), Toast.LENGTH_SHORT).show();
