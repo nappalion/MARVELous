@@ -1,4 +1,4 @@
-Original App Design Project - README Template
+Original App Design Project - README 
 ===
 
 Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
@@ -32,10 +32,10 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 - [X] User can register for a new account, and this gets stored to a database for the user to log in later.
 - [X] Bottom toolbar allows for navigation to different fragments: Home, Search, Library, Account
 - [ ] Home tab displays top rated comics and most read comics.
-- [ ] Search tab displays filters which can help the user find a specific comic.
+- [X] Search tab displays filters which can help the user find a specific comic.
+    - In progress, category filters
 - [X] Library tab displays tabs for users specific comics: Reading, Completed, On Hold, Dropped, Plan to Watch.
 - [X] Account tab shows user info.
-    - In Progress: favorite comics.
 - [X] User can customize their account page with a biography, profile picture, and username.
 - [ ] Users should be able to click a comic anywhere in the app and see the info of that app.
 - [ ] Users should be able to favorite a comic.
@@ -46,7 +46,8 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 - [ ] Popups can be used for a smooth experience (but fragments could be used in place of this).
 - [ ] Users can like or dislike other people's reviews.
 - [ ] Users can follow other users and view their pages.
-- [ ] UI similar to the figma page.
+- [X] UI similar to the figma page.
+     - Continuous Progress
 - [ ] Live discussion posts.
 - [ ] User can see comic variants.
 - [ ] User can see the review and their page number under each comic cover thumbnail.
@@ -213,4 +214,20 @@ Settings Activity with Preferences Fragment:
 Library Fragment Progress: 
 
 <img src="Sprint2-LibraryActivity.gif" width=400>
+
+##### Sprint 3 Progress
+GIFS:
+
+Sign Up Activity Progress with Email and Sign Up Page:
+
+<img src="Sprint3-SignupActivityProgress.gif" width=400>
+
+Account Page Completion and Search Fragment Progress:
+
+<img src="Sprint3-ProfileFragmentComplete_SearchFragmentProgress.gif" width=400>
+
+Comic Detail Progress:
+
+<img src="Sprint3-ComicDetailProgress.png" width=400>
+
 
