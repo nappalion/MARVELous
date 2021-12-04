@@ -183,6 +183,7 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
                             Comic comic1 = comicsList.get(i);
                             Intent intent = new Intent(v.getContext(), ComicDetailActivity.class);
                             intent.putExtra("comic", Parcels.wrap(comic1));
+                            intent.putExtra("userComic", Parcels.wrap(userComic));
                             context.startActivity(intent);
                         }
                     }

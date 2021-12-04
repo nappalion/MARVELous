@@ -96,9 +96,9 @@ public class ComicDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         comic = Parcels.unwrap(getIntent().getParcelableExtra("comic"));
+        userComic = Parcels.unwrap(getIntent().getParcelableExtra("userComic"));
         setContentView(R.layout.comic_detail);
 
-        userComic = new UserComic();
 
         tvTitle = findViewById(R.id.lblTitle);
         tvPublished = findViewById(R.id.lblPublished);
@@ -117,6 +117,7 @@ public class ComicDetailActivity extends AppCompatActivity {
         Log.i(TAG, imageUrl);
 
         makeRequest();
+        initializeBtnFavorite(userComic);
 
         //METHOD FOR CHANGING STATUS AND ADDS TO LIBRARY IF NOT INSIDE ALREADY
         btnStatus.setOnClickListener(new View.OnClickListener() {
@@ -164,10 +165,11 @@ public class ComicDetailActivity extends AppCompatActivity {
                                     }
                                 }
                                 if (!added){
-                                    userComic.setUserId(currentUser);
-                                    userComic.setComicId(Integer.parseInt(comic.id));
-                                    userComic.setStatus(item.getTitle().toString());
-                                    saveUserComic(userComic);
+                                    UserComic usercomic = new UserComic();
+                                    usercomic.setUserId(currentUser);
+                                    usercomic.setComicId(Integer.parseInt(comic.id));
+                                    usercomic.setStatus(item.getTitle().toString());
+                                    saveUserComic(usercomic);
                                 }
                             }
                         });
@@ -182,7 +184,6 @@ public class ComicDetailActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-
                 btnBookmark.setText( userComic.getPageNumber() + "/" + userComic.getTotalPages());
                 Intent i = new Intent (getApplicationContext(), PageNumberActivity.class);
                 i.putExtra("totalPages", userComic.getTotalPages());
@@ -199,22 +200,28 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
 
-        initializeBtnFavorite(userComic);
-
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                // Creates new user if doesn't find comicId
-//                userComic.setComicId(Integer.parseInt(comic.id));
-//                userComic.setUserId(ParseUser.getCurrentUser());
-
-                if (userComic.getIsFavorite() == true) {
-                    userComic.setIsFavorite(false);
-                }
-                else {
-                    userComic.setIsFavorite(true);
-                }
-                userComic.saveInBackground();
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("UserComic");
+                query.getInBackground(userComic.getObjectId(), new GetCallback<ParseObject>() {
+                    @Override
+                    public void done(ParseObject object, ParseException e) {
+                        if (e == null) {
+                            if (userComic.getIsFavorite()) {
+                                object.put("isFavorite", false);
+                            }
+                            else {
+                                object.put("isFavorite", true);
+                            }
+                            object.saveInBackground();
+                        } else {
+                            // something went wrong
+                            System.out.println(userComic.getObjectId());
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
@@ -226,17 +233,18 @@ public class ComicDetailActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // Extract name value from result extras
-            int pageNumber = Integer.valueOf(data.getExtras().getString("pageNumber"));
+            int pageNumber = Integer.parseInt(data.getExtras().getString("pageNumber"));
             btnBookmark.setText( pageNumber + "/" + userComic.getTotalPages());
         }
     }
 
     private void initializeBtnFavorite(UserComic userComic) {
-        if (userComic.getIsFavorite() == true) {
-            btnFavorite.setChecked(true);
-        }
-        else {
-            btnFavorite.setChecked(false);
+        if (userComic!= null) {
+            if (userComic.getIsFavorite()) {
+                btnFavorite.setChecked(true);
+            } else {
+                btnFavorite.setChecked(false);
+            }
         }
     }
 
