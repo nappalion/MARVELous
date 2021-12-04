@@ -241,5 +241,8 @@ Email Verification:
 
 <img src="Sprint4-EmailVerification.gif" width=400>
 
+Home Fragment:
+
+<img src="Sprint4-HomeFragment.gif" width=400>
 
 
