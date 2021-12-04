@@ -33,12 +33,15 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
+import com.example.marvelous.models.Comic;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.io.Console;
+import java.util.Date;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
@@ -57,9 +60,15 @@ public class ComicDetailActivity extends AppCompatActivity {
 
     public static final String TAG = "ComicDetailActivity";
 
-    final String TS = "thesoer";
-    final String API_KEY = "8ad698beaf7b0053b3a973063acca16d";
-    final String HASH = "d98af00cec0d8d6a4d217723b7ea5e7b";
+    final String PUBLIC_KEY = "685c68298103e0c7ba2d074f58a4619b";
+    final String PRIVATE_KEY = "3b9af090798ac35d9d1176e212ed8c9451c30c9c";
+
+    Date date = new Date();
+    long timeMilli = date.getTime();
+    String TS = (String.valueOf(timeMilli));
+    String hashConvert = TS + PRIVATE_KEY + PUBLIC_KEY;
+    String HASH = md5(hashConvert);
+
     String base_url ="https://gateway.marvel.com:443/v1/public/";
     String imageName;
 
@@ -110,9 +119,11 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
 
+        Comic comic= Parcels.unwrap(getIntent().getParcelableExtra("comic"));
+
         RequestQueue queue = Volley.newRequestQueue(ComicDetailActivity.this);
         String id = "89680";
-        String url = base_url + "comics" + "/" + id + "?ts=" + TS + "&apikey=" + API_KEY + "&hash=" + HASH;
+        String url = base_url + "comics" + "/" + comic.id + "?ts=" + TS + "&apikey=" + PUBLIC_KEY + "&hash=" + HASH;
 
         Log.i("URL", url);
 
@@ -123,7 +134,6 @@ public class ComicDetailActivity extends AppCompatActivity {
                 try {
                     tvTitle.setText(object.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("title"));
                     tvPublished.setText(object.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("modified"));
-
                     String imagePath = object.getJSONObject("data").getJSONArray("results").getJSONObject(0)
                             .getJSONArray("images").getJSONObject(0).getString("path");
                     String imageExtension = object.getJSONObject("data").getJSONArray("results").getJSONObject(0)

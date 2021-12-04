@@ -1,19 +1,27 @@
 package com.example.marvelous.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.marvelous.R;
+import com.example.marvelous.activities.ComicDetailActivity;
+import com.example.marvelous.activities.SettingsActivity;
 import com.example.marvelous.models.Comic;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,11 +31,11 @@ import java.util.Locale;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> implements Filterable {
 
     Context context;
-    List<String> comics;
-    List<String> comicsAll;
+    List<Comic> comics;
+    List<Comic> comicsAll;
 
     // Pass in context and list of tweets
-    public SearchAdapter(Context context, List<String> comics) {
+    public SearchAdapter(Context context, List<Comic> comics) {
         this.context = context;
         this.comics = comics;
         this.comicsAll = new ArrayList<>(comics);
@@ -44,8 +52,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     // Bind values based on position of element
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvDescription.setText(String.valueOf(position));
-        holder.tvComicname.setText(comics.get(position));
+        Comic comic = comics.get(position);
+        holder.bind(comic);
     }
 
     @Override
@@ -60,7 +68,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<String> list) {
+    public void addAll(List<Comic> list) {
         comics.addAll(list);
         notifyDataSetChanged();
     }
@@ -76,14 +84,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
-            List<String> filteredList = new ArrayList<>();
+            List<Comic> filteredList = new ArrayList<>();
 
             if(charSequence.toString().isEmpty()){
                 filteredList.addAll(comicsAll);
             }
             else{
-                for(String comic: comicsAll){
-                    if(comic.toLowerCase().contains(charSequence.toString().toLowerCase())){
+                for(Comic comic: comicsAll){
+                    if(comic.title.toLowerCase().contains(charSequence.toString().toLowerCase())){
                         filteredList.add(comic);
                     }
                 }
@@ -96,7 +104,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             comics.clear();
-            comics.addAll((Collection<? extends String>) filterResults.values);
+            comics.addAll((Collection<? extends Comic>) filterResults.values);
             notifyDataSetChanged();
         }
     };
@@ -107,17 +115,37 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         ImageView ivImage;
         TextView tvComicname;
         TextView tvDescription;
+        RelativeLayout comicCard;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvComicname = itemView.findViewById(R.id.tvComicname);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            comicCard = itemView.findViewById(R.id.comicCard);
         }
 
-        public void bind(String comic) {
-            tvComicname.setText(comic);
-//            Glide.with(context).load(tweet.user.profileImageUrl).into(ivImage);
+        public void bind(Comic comic) {
+            tvComicname.setText(comic.title);
+
+            if (comic.series == null){
+                tvDescription.setText("No Description");
+            }
+            else{
+                tvDescription.setText(comic.series);
+            }
+             Glide.with(context).load(comic.url).into(ivImage);
+
+            comicCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), ComicDetailActivity.class);
+                    intent.putExtra("comic", Parcels.wrap(comic));
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 

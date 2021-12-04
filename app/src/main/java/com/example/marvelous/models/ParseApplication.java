@@ -11,7 +11,6 @@ public class ParseApplication extends Application {
         super.onCreate();
 
         //Register your parse models
-        ParseObject.registerSubclass(Comic.class);
         ParseObject.registerSubclass(UserComic.class);
 
         //set applicationID and sever

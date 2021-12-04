@@ -13,37 +13,38 @@
         android:id="@+id/ivLogo"
         android:layout_width="match_parent"
         android:layout_height="110sp"
-        android:adjustViewBounds="true"
-        android:layout_marginTop="50sp"
-        android:layout_marginBottom="50sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50sp"
+        android:layout_marginBottom="50sp"
+        android:adjustViewBounds="true"
         android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="50sp"
-        android:layout_marginLeft="50sp"
         android:layout_below="@+id/ivLogo"
         android:layout_centerHorizontal="true"
-        android:padding="10sp"
+        android:layout_marginLeft="50sp"
+        android:layout_marginRight="50sp"
         android:background="@drawable/edit_text_border"
-        android:hint="Username"/>
+        android:hint="Username or Email"
+        android:padding="10sp" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:layout_marginRight="50sp"
-        android:layout_marginLeft="50sp"
         android:layout_below="@+id/etUsername"
         android:layout_centerHorizontal="true"
-        android:padding="10sp"
+        android:layout_marginLeft="50sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginRight="50sp"
         android:background="@drawable/edit_text_border"
-        android:hint="Password"/>
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogin"

@@ -53,6 +53,7 @@
         android:layout_marginRight="50sp"
         android:background="@drawable/edit_text_border"
         android:hint="Email address"
+        android:inputType="textEmailAddress"
         android:padding="10sp" />
 
     <EditText
@@ -72,27 +73,30 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="50sp"
+        android:layout_below="@id/etUsername"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="50sp"
         android:layout_marginTop="10sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/etUsername"
-        android:padding="10sp"
+        android:layout_marginRight="50sp"
         android:background="@drawable/edit_text_border"
-        android:hint="Password"/>
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10sp"
+        android:password="false" />
 
     <EditText
         android:id="@+id/etConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="50sp"
+        android:layout_below="@id/etPassword"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="50sp"
         android:layout_marginTop="10sp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/etPassword"
-        android:padding="10sp"
+        android:layout_marginRight="50sp"
         android:background="@drawable/edit_text_border"
-        android:hint="Confirm Password"/>
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:padding="10sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCreate"
