@@ -3,42 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginRight="5sp">
+    android:layout_marginTop="5sp"
+    android:layout_marginRight="5sp"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/comicContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="0.5dp"
         android:background="@drawable/library_status_shape"
-        android:layout_margin="1dp"
         android:elevation="5dp"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivComic"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="200sp"
-            android:layout_marginTop="10sp"
             android:layout_marginLeft="10sp"
+            android:layout_marginTop="10sp"
             android:layout_marginRight="10sp"
             android:layout_marginBottom="0sp"
             android:adjustViewBounds="true"
-            android:src="@drawable/test_comic" />
+            android:src="@drawable/comic_placeholder" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginBottom="5sp">
+            android:layout_marginBottom="5sp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/ivStar"
                 android:layout_width="wrap_content"
                 android:layout_height="25sp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/icon_star"/>
+                android:src="@drawable/icon_star" />
+
             <TextView
                 android:id="@+id/tvRating"
                 android:layout_width="wrap_content"
@@ -46,18 +48,20 @@
                 android:layout_marginRight="2sp"
                 android:textSize="15sp"
                 tools:text="3.23" />'
+
             <ImageView
                 android:id="@+id/ivBookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="25sp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/icon_bookmark" />
+
             <TextView
                 android:id="@+id/tvBookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
                 android:lines="1"
+                android:textSize="15sp"
                 tools:text="4/237" />
         </LinearLayout>
 

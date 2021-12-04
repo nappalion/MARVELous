@@ -15,6 +15,14 @@
         android:theme="@style/Theme.MARVELous"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.PageNumberActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dialog"/>
+        <activity
+            android:name=".activities.ReviewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Dialog" />
+        <activity
             android:name=".activities.SignupActivity1"
             android:exported="false" />
         <activity
@@ -32,10 +40,10 @@
         <activity
             android:name=".activities.SignupActivity2"
             android:exported="false" />
-
         <activity
             android:name=".activities.ComicDetailActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Dialog" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

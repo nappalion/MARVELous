@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -109,7 +110,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (item.getItemId() == R.id.mitAdd) {
-            Toast.makeText(MainActivity.this, "Add Item!", Toast.LENGTH_SHORT).show();
+            Fragment fragment;
+            changeActionBar(R.menu.menu_search, "Search");
+            fragment = new SearchFragment();
+            fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
             return true;
         }
         return super.onOptionsItemSelected(item);

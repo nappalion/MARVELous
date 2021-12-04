@@ -94,12 +94,12 @@ public class SignupActivity1 extends AppCompatActivity {
                 if (e == null) {
                     // Hooray! Let them use the app now.
                     goSignupActivity2();
-                    Toast.makeText(SignupActivity1.this, "Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity1.this, "Successfully signed up!", Toast.LENGTH_SHORT).show();
                 } else {
                     // Sign up didn't succeed. Look at the ParseException
                     // to figure out what went wrong
-                    Log.e(TAG, "Issue with Signup.", e);
-                    Toast.makeText(SignupActivity1.this, "Issue with Signup.", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Issue with Signup", e);
+                    Toast.makeText(SignupActivity1.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.marvelous.R;
-import com.example.marvelous.adapters.LibraryComicsAdapter;
+import com.example.marvelous.adapters.ProfileAdapter;
 import com.example.marvelous.models.UserComic;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -42,7 +43,7 @@ public class ProfileFragment extends Fragment {
     private int favoriteCount = 0;
 
     List<UserComic> userComics;
-    LibraryComicsAdapter comicsAdapter;
+    ProfileAdapter comicsAdapter;
     private RecyclerView rvComics;
 
     private SwipeRefreshLayout swipeContainer;
@@ -54,6 +55,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -63,8 +65,7 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvComics = view.findViewById(R.id.rvFavorites);
         userComics = new ArrayList<>();
-        comicsAdapter = new LibraryComicsAdapter(userComics, getContext());
-
+        comicsAdapter = new ProfileAdapter(userComics, getContext());
 
         tvUsername = view.findViewById(R.id.tvUsername);
         ivProfilePic = view.findViewById(R.id.ivProfilePic);
@@ -90,7 +91,7 @@ public class ProfileFragment extends Fragment {
 
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        swipeContainer.setColorSchemeResources(android.R.color.holo_red_dark,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -99,6 +100,12 @@ public class ProfileFragment extends Fragment {
         int numberOfColumns = 3;
         rvComics.setLayoutManager(new GridLayoutManager(getContext(),numberOfColumns));
 
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        super.onActivityCreated(savedInstanceState);
     }
 
     protected void queryProfile() {

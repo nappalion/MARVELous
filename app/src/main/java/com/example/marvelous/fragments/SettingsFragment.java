@@ -1,6 +1,8 @@
 package com.example.marvelous.fragments;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -31,7 +34,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     public static final int PICK_IMAGE = 1;
     private EditTextPreference usernamePref;
-    private EditTextPreference passwordPref;
+    private Preference passwordPref;
     private EditTextPreference bioPref;
     private Preference pfpPref;
     ParseUser currentUser = ParseUser.getCurrentUser();
@@ -45,7 +48,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         usernamePref = (EditTextPreference) findPreference("etUsername");
-        passwordPref = (EditTextPreference) findPreference("etPassword");
+        passwordPref = (Preference) findPreference("etPassword");
         bioPref = (EditTextPreference) findPreference("etBio");
         pfpPref = (Preference) findPreference("editPfP");
 
@@ -70,6 +73,37 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     Toast.makeText(getContext(), "Cannot be longer than 150 characters", Toast.LENGTH_SHORT).show();
                     return false;
                 }
+            }
+        });
+
+        passwordPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("Request password change?");
+                dialog.setMessage("You can change your password for security reasons or reset it if you forget it. A request will be sent to your email.");
+                dialog.setCancelable(true);
+                dialog.setPositiveButton("Request", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        passwordReset();
+                    }
+                });
+
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dlg, int which)
+                    {
+                        dlg.cancel();
+                    }
+                });
+
+                AlertDialog al = dialog.create();
+                al.show();
+                return false;
             }
         });
 
@@ -104,6 +138,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        super.onActivityCreated(savedInstanceState);
+    }
+
 
     public byte[] convertImageToByte(Uri uri){
         byte[] data = null;
@@ -127,6 +167,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 Toast.makeText(getContext(), "Save Successful", Toast.LENGTH_SHORT).show();
             }else{
                 // Something went wrong while saving
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void passwordReset() {
+        // An e-mail will be sent with further instructions
+        currentUser.requestPasswordResetInBackground(currentUser.getEmail(), e -> {
+            if (e == null) {
+                // An email was successfully sent with reset instructions.
+                Toast.makeText(getContext(), "An email was successfully sent with reset instructions", Toast.LENGTH_SHORT).show();
+
+            } else {
+                // Something went wrong. Look at the ParseException to see what's up.
                 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

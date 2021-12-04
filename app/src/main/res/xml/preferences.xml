@@ -14,8 +14,7 @@
             android:summary="Change user name"
             android:title="Username"
             app:iconSpaceReserved="false" />
-        <EditTextPreference
-            android:inputType="textPassword"
+        <Preference
             android:key="etPassword"
             android:selectAllOnFocus="false"
             android:singleLine="false"
