@@ -234,6 +234,12 @@ Comic Detail Progress:
 GIFS and IMAGES: 
 
 Search Fragment and Comic Detail Activity:
+
 <img src="Sprint4-SearchFragmentandComicDetail.gif" width=400>
+
+Email Verification:
+
+<img src="Sprint4-EmailVerification.gif" width=400>
+
 
 
