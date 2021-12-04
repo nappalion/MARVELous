@@ -20,6 +20,14 @@ public class UserComic extends ParseObject {
     public static final String KEY_REVIEWPOST = "reviewPost";
     public static final String KEY_SAMPLEIMAGE = "sampleImage";
     public static final String KEY_TOTALPAGES = "totalPages";
+    public static final String KEY_COMICIMAGELINK = "comicImageLink";
+
+    public String getComicImagelink() {
+        return getString(KEY_COMICIMAGELINK);
+    }
+    public void setComicImagelink(String imageUrl) {
+        put(KEY_COMICIMAGELINK, imageUrl);
+    }
 
     public int getComicId() {
         return getInt(KEY_COMICID);
