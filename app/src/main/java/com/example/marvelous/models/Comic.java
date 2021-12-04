@@ -1,30 +1,38 @@
 package com.example.marvelous.models;
 
-import androidx.annotation.NonNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.parceler.Parcel;
 
-import com.parse.ParseClassName;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
+import java.util.ArrayList;
+import java.util.List;
 
-@ParseClassName("Comic")
-public class Comic extends ParseObject {
+@Parcel
+public class Comic {
 
-    /*public static final String KEY_DESCRIPTION = "Description";
-    public static final String KEY_IMAGE = "image";
-    public static final String KEY_COMIC = "comic";
+    public String id;
+    public String title;
+    public String description;
+    public String url;
+    public String series;
 
-    public String getDescription(){
-        return getString(KEY_DESCRIPTION);
+    public static Comic fromJson(JSONObject jsonObject) throws JSONException {
+        Comic comic = new Comic();
+        comic.id = jsonObject.getString("id");
+        comic.title = jsonObject.getString("title");
+        comic.description = jsonObject.getString("description");
+        comic.url = jsonObject.getJSONObject("thumbnail").getString("path") + "." + jsonObject.getJSONObject("thumbnail").getString("extension");
+        comic.series = jsonObject.getJSONObject("series").getString("name");
+        return comic;
     }
 
-    public void setDescription(String description){
-        put(KEY_DESCRIPTION, description);
+    public static List<Comic> fromJsonArray(JSONArray jsonArray) throws JSONException {
+        List<Comic> comics = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++){
+            comics.add(fromJson(jsonArray.getJSONObject(i)));
+        }
+        return comics;
     }
 
-    public ParseFile getImage() {return getParseFile(KEY_IMAGE);}
-
-    public ParseUser getComic(){
-        return getParseUser(KEY_COMIC);
-    }*/
 }
