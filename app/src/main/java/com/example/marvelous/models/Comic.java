@@ -11,11 +11,13 @@ import java.util.List;
 @Parcel
 public class Comic {
 
+    public int id2;
     public String id;
     public String title;
     public String description;
     public String url;
     public String series;
+    public int eventsNum;
 
     public static Comic fromJson(JSONObject jsonObject) throws JSONException {
         Comic comic = new Comic();
@@ -24,6 +26,7 @@ public class Comic {
         comic.description = jsonObject.getString("description");
         comic.url = jsonObject.getJSONObject("thumbnail").getString("path") + "." + jsonObject.getJSONObject("thumbnail").getString("extension");
         comic.series = jsonObject.getJSONObject("series").getString("name");
+        comic.eventsNum = jsonObject.getJSONObject("events").getInt("available");
         return comic;
     }
 
@@ -45,4 +48,23 @@ public class Comic {
         return comic;
     }
 
+
+    public String getSeries() {
+        return series;
+    }
+    public int getId() {
+        return id2;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }
