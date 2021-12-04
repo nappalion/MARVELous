@@ -1,13 +1,22 @@
 package com.example.marvelous.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +29,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 
 import org.json.JSONArray;
@@ -27,6 +39,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Console;
+
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
 
 public class ComicDetailActivity extends AppCompatActivity {
     TextView tvTitle;
@@ -36,6 +51,11 @@ public class ComicDetailActivity extends AppCompatActivity {
     TextView tvCoverArtist;
     TextView tvDescription;
     ImageView imageView;
+    Button btnReview;
+    String imageUrl;
+    ScrollView scrollView;
+
+    public static final String TAG = "ComicDetailActivity";
 
     final String TS = "thesoer";
     final String API_KEY = "8ad698beaf7b0053b3a973063acca16d";
@@ -55,6 +75,40 @@ public class ComicDetailActivity extends AppCompatActivity {
         tvCoverArtist = findViewById(R.id.lblCoverArtist);
         tvDescription = findViewById(R.id.lblDescription);
         imageView = (ImageView)findViewById(R.id.ivComic);
+        btnReview = findViewById(R.id.btnReview);
+        scrollView = findViewById(R.id.scrollView);
+
+        imageUrl = getIntent().getStringExtra("sampleImage");
+        Log.i(TAG, imageUrl);
+
+        Glide.with(this)
+                .load(imageUrl)
+                .into(imageView);
+
+        Glide.with(this)
+                .load(imageUrl)
+                .transform(new MultiTransformation<Bitmap>(new BlurTransformation(150), new BrightnessFilterTransformation((float) -0.4)))
+                .into(new CustomTarget<Drawable>() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        scrollView.setBackground(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
+
+        btnReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent (getApplicationContext(), ReviewActivity.class);
+                i.putExtra("imageUrl", imageUrl);
+                startActivity(i);
+            }
+        });
 
         RequestQueue queue = Volley.newRequestQueue(ComicDetailActivity.this);
         String id = "89680";
@@ -76,9 +130,9 @@ public class ComicDetailActivity extends AppCompatActivity {
                             .getJSONArray("images").getJSONObject(0).getString("extension");
                     imageName = imagePath + "/portrait_xlarge" + "." + imageExtension;
                     Log.i("test", imageName);
-                    Glide.with(ComicDetailActivity.this)
+                    /* Glide.with(ComicDetailActivity.this)
                             .load("http://i.annihil.us/u/prod/marvel/i/mg/a/10/619e637b7fe1f/portrait_xlarge.jpg")
-                            .into(imageView);
+                            .into(imageView); */
 
                     JSONArray creators = object.getJSONObject("data").getJSONArray("results").getJSONObject(0)
                             .getJSONObject("creators").getJSONArray("items");
