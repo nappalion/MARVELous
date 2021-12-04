@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,6 +33,7 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.test.InputFilterMinMax;
 
+
 import org.w3c.dom.Text;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
@@ -45,7 +47,9 @@ public class ReviewActivity extends AppCompatActivity {
     String imageUrl;
     EditText etReview;
     TextView tvCounter;
+
     EditText etUserReview;
+
     public static final String TAG = "ReviewActivity";
 
     @Override
@@ -60,6 +64,7 @@ public class ReviewActivity extends AppCompatActivity {
         ivComic = findViewById(R.id.ivComic);
         tvComicTitle = findViewById(R.id.tvComicTitle);
         etReview = findViewById(R.id.etReview);
+
         etUserReview = findViewById(R.id.etUserReview);
         tvCounter = findViewById(R.id.tvCounter);
 
@@ -78,8 +83,8 @@ public class ReviewActivity extends AppCompatActivity {
             }
         };
 
-        etUserReview.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
 
+        etUserReview.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
         etReview.addTextChangedListener(textWatcher);
 
         Glide.with(this)

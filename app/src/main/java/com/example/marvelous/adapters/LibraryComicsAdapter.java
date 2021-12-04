@@ -3,9 +3,11 @@ package com.example.marvelous.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,7 @@ import com.example.marvelous.R;
 import com.example.marvelous.activities.ComicDetailActivity;
 import com.example.marvelous.activities.ReviewActivity;
 import com.example.marvelous.models.Comic;
+
 import com.example.marvelous.models.UserComic;
 import com.parse.ParseFile;
 
