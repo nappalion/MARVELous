@@ -117,7 +117,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         TextView tvDescription;
         RelativeLayout comicCard;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivImage);

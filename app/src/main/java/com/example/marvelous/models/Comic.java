@@ -35,4 +35,14 @@ public class Comic {
         return comics;
     }
 
+    public static Comic singleFromJson(JSONObject jsonObject) throws JSONException {
+        Comic comic = new Comic();
+        comic.id = jsonObject.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("id");
+        comic.title = jsonObject.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("title");
+        comic.description = jsonObject.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("description");
+        comic.url = jsonObject.getJSONObject("data").getJSONArray("results").getJSONObject(0).getJSONObject("thumbnail").getString("path") + "." + jsonObject.getJSONObject("data").getJSONArray("results").getJSONObject(0).getJSONObject("thumbnail").getString("extension");
+        comic.series = jsonObject.getJSONObject("data").getJSONArray("results").getJSONObject(0).getJSONObject("series").getString("name");
+        return comic;
+    }
+
 }

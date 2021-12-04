@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/reading"
+        android:title="Reading"/>
+
+    <item
+        android:id="@+id/completed"
+        android:title="Completed"/>
+
+    <item
+        android:id="@+id/onHold"
+        android:title="On Hold"/>
+
+    <item
+        android:id="@+id/dropped"
+        android:title="Dropped"/>
+
+    <item
+        android:id="@+id/planToWatch"
+        android:title="Plan to Watch"/>
+
+</menu>
