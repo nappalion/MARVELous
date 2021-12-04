@@ -31,7 +31,7 @@
                 android:layout_weight="1"/>
 
             <ToggleButton
-                android:id="@+id/button_favorite"
+                android:id="@+id/btnFavorite"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
                 android:layout_marginTop="15sp"

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,6 +31,10 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 import com.example.marvelous.models.Comic;
+import com.example.marvelous.models.UserComic;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +60,7 @@ public class ComicDetailActivity extends AppCompatActivity {
     Button btnReview;
     String imageUrl;
     ScrollView scrollView;
+    ToggleButton btnFavorite;
 
     public static final String TAG = "ComicDetailActivity";
 
@@ -72,8 +78,10 @@ public class ComicDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Comic comic= Parcels.unwrap(getIntent().getParcelableExtra("comic"));
+        Comic comic = Parcels.unwrap(getIntent().getParcelableExtra("comic"));
         setContentView(R.layout.comic_detail);
+
+        UserComic userComic = new UserComic();
 
         tvTitle = findViewById(R.id.lblTitle);
         tvPublished = findViewById(R.id.lblPublished);
@@ -84,6 +92,7 @@ public class ComicDetailActivity extends AppCompatActivity {
         imageView = (ImageView)findViewById(R.id.ivComic);
         btnReview = findViewById(R.id.btnReview);
         scrollView = findViewById(R.id.scrollView);
+        btnFavorite = findViewById(R.id.btnFavorite);
 
         imageUrl = comic.url;
         Log.i(TAG, imageUrl);
@@ -94,6 +103,29 @@ public class ComicDetailActivity extends AppCompatActivity {
                 Intent i = new Intent (getApplicationContext(), ReviewActivity.class);
                 i.putExtra("imageUrl", imageUrl);
                 startActivity(i);
+            }
+        });
+
+        initializeBtnFavorite(userComic);
+
+        btnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Create Parse Row
+                userComic.setComicId(Integer.parseInt(comic.id));
+
+
+                if (userComic.getIsFavorite() == true) {
+                    userComic.setIsFavorite(false);
+                }
+                else {
+                    userComic.setIsFavorite(true);
+                }
+
+                userComic.setUserId(ParseUser.getCurrentUser());
+
+                userComic.saveInBackground();
             }
         });
 
@@ -167,6 +199,15 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
+    }
+
+    private void initializeBtnFavorite(UserComic userComic) {
+        if (userComic.getIsFavorite() == true) {
+            btnFavorite.setChecked(true);
+        }
+        else {
+            btnFavorite.setChecked(false);
+        }
     }
 
     public static String md5(final String s) {
