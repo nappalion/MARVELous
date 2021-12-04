@@ -11,9 +11,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +34,10 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 import com.example.marvelous.models.Comic;
 import com.example.marvelous.models.UserComic;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.json.JSONArray;
@@ -50,6 +54,7 @@ import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
 
 public class ComicDetailActivity extends AppCompatActivity {
 
+    private final int REQUEST_CODE = 32;
     TextView tvTitle;
     TextView tvPublished;
     TextView tvPenciler;
@@ -61,6 +66,10 @@ public class ComicDetailActivity extends AppCompatActivity {
     String imageUrl;
     ScrollView scrollView;
     ToggleButton btnFavorite;
+    Button btnBookmark;
+    Button btnStatus;
+
+    UserComic userComic;
 
     public static final String TAG = "ComicDetailActivity";
 
@@ -81,7 +90,7 @@ public class ComicDetailActivity extends AppCompatActivity {
         Comic comic = Parcels.unwrap(getIntent().getParcelableExtra("comic"));
         setContentView(R.layout.comic_detail);
 
-        UserComic userComic = new UserComic();
+        userComic = new UserComic();
 
         tvTitle = findViewById(R.id.lblTitle);
         tvPublished = findViewById(R.id.lblPublished);
@@ -93,9 +102,47 @@ public class ComicDetailActivity extends AppCompatActivity {
         btnReview = findViewById(R.id.btnReview);
         scrollView = findViewById(R.id.scrollView);
         btnFavorite = findViewById(R.id.btnFavorite);
+        btnBookmark = findViewById(R.id.btnBookmark);
+        btnStatus = findViewById(R.id.btnStatus);
 
         imageUrl = comic.url;
         Log.i(TAG, imageUrl);
+
+        btnStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(ComicDetailActivity.this, btnStatus);
+                // Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        btnStatus.setText(item.getTitle());
+                        userComic.setStatus(item.getTitle().toString());
+                        userComic.setComicId(Integer.parseInt(comic.id));
+                        userComic.saveInBackground();
+                        return true;
+                    }
+                });
+
+                popup.show();
+            }
+        });
+
+        btnBookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                btnBookmark.setText( userComic.getPageNumber() + "/" + userComic.getTotalPages());
+                Intent i = new Intent (getApplicationContext(), PageNumberActivity.class);
+                i.putExtra("totalPages", userComic.getTotalPages());
+                startActivityForResult(i, REQUEST_CODE);
+            }
+        });
 
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,9 +159,9 @@ public class ComicDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Create Parse Row
+                // Creates new user if doesn't find comicId
                 userComic.setComicId(Integer.parseInt(comic.id));
-
+                userComic.setUserId(ParseUser.getCurrentUser());
 
                 if (userComic.getIsFavorite() == true) {
                     userComic.setIsFavorite(false);
@@ -122,8 +169,6 @@ public class ComicDetailActivity extends AppCompatActivity {
                 else {
                     userComic.setIsFavorite(true);
                 }
-
-                userComic.setUserId(ParseUser.getCurrentUser());
 
                 userComic.saveInBackground();
             }
@@ -199,6 +244,17 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // REQUEST_CODE is defined above
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+            int pageNumber = Integer.valueOf(data.getExtras().getString("pageNumber"));
+            btnBookmark.setText( pageNumber + "/" + userComic.getTotalPages());
+        }
     }
 
     private void initializeBtnFavorite(UserComic userComic) {

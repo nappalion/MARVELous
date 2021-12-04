@@ -14,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
+import com.test.InputFilterMinMax;
 
 import org.w3c.dom.Text;
 
@@ -43,6 +45,7 @@ public class ReviewActivity extends AppCompatActivity {
     String imageUrl;
     EditText etReview;
     TextView tvCounter;
+    EditText etUserReview;
     public static final String TAG = "ReviewActivity";
 
     @Override
@@ -57,6 +60,7 @@ public class ReviewActivity extends AppCompatActivity {
         ivComic = findViewById(R.id.ivComic);
         tvComicTitle = findViewById(R.id.tvComicTitle);
         etReview = findViewById(R.id.etReview);
+        etUserReview = findViewById(R.id.etUserReview);
         tvCounter = findViewById(R.id.tvCounter);
 
         imageUrl = getIntent().getStringExtra("imageUrl");
@@ -73,6 +77,8 @@ public class ReviewActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         };
+
+        etUserReview.setFilters(new InputFilter[]{ new InputFilterMinMax("0", "100")});
 
         etReview.addTextChangedListener(textWatcher);
 
