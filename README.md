@@ -230,4 +230,19 @@ Comic Detail Progress:
 
 <img src="Sprint3-ComicDetailProgress.png" width=400>
 
+##### Sprint 4
+GIFS and IMAGES: 
+
+Search Fragment and Comic Detail Activity:
+
+<img src="Sprint4-SearchFragmentandComicDetail.gif" width=400>
+
+Email Verification:
+
+<img src="Sprint4-EmailVerification.gif" width=400>
+
+Home Fragment:
+
+<img src="Sprint4-HomeFragment.gif" width=400>
+
 

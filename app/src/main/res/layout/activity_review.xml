@@ -123,6 +123,7 @@
                         android:paddingLeft="15sp"
                         android:textSize="30sp"
                         android:inputType="number"
+
                         android:text="100"
                         android:textColor="@color/white"
                         android:background="@drawable/black_transparent_rectangle_button"/>
