@@ -1,6 +1,7 @@
 package com.example.marvelous.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.marvelous.R;
+import com.example.marvelous.activities.ComicDetailActivity;
+import com.example.marvelous.activities.ReviewActivity;
 import com.example.marvelous.models.UserComic;
 import com.parse.ParseFile;
 
@@ -109,6 +112,11 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
                 @Override
                 public void onClick(View v) {
                     Toast.makeText( v.getContext(), "Comic Id: " + String.valueOf(userComic.getComicId()), Toast.LENGTH_SHORT).show();
+
+                    // Review Activity
+                    Intent i = new Intent (context, ComicDetailActivity.class);
+                    i.putExtra("sampleImage", sampleImage.getUrl());
+                    context.startActivity(i);
                 }
             });
         }

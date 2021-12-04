@@ -18,4 +18,27 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="Theme.Dialog"
+        parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
+        <!-- removing the dialog's action bar -->
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowMinWidthMajor">500sp</item>
+        <item name="windowMinWidthMinor">700sp</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/light_grey</item>
+        <item name="colorControlActivated">@color/yellow</item>
+    </style>
+
+    <style name="EditTextHint" parent="TextAppearance.AppCompat">
+        <item name="colorAccent">@color/grey</item>
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="colorControlNormal">@color/grey</item>
+        <item name="colorControlActivated">@color/grey</item>
+        <item name="colorControlHighlight">@color/grey</item>
+    </style>
+
 </resources>

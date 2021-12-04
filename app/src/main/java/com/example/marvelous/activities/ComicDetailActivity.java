@@ -1,15 +1,22 @@
 package com.example.marvelous.activities;
 
-import static com.example.marvelous.fragments.SearchFragment.md5;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +29,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 import com.example.marvelous.models.Comic;
 
@@ -33,6 +43,9 @@ import org.parceler.Parcels;
 import java.io.Console;
 import java.util.Date;
 
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
+
 public class ComicDetailActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvPublished;
@@ -41,6 +54,11 @@ public class ComicDetailActivity extends AppCompatActivity {
     TextView tvCoverArtist;
     TextView tvDescription;
     ImageView imageView;
+    Button btnReview;
+    String imageUrl;
+    ScrollView scrollView;
+
+    public static final String TAG = "ComicDetailActivity";
 
     final String PUBLIC_KEY = "685c68298103e0c7ba2d074f58a4619b";
     final String PRIVATE_KEY = "3b9af090798ac35d9d1176e212ed8c9451c30c9c";
@@ -66,6 +84,40 @@ public class ComicDetailActivity extends AppCompatActivity {
         tvCoverArtist = findViewById(R.id.lblCoverArtist);
         tvDescription = findViewById(R.id.lblDescription);
         imageView = (ImageView)findViewById(R.id.ivComic);
+        btnReview = findViewById(R.id.btnReview);
+        scrollView = findViewById(R.id.scrollView);
+
+        imageUrl = getIntent().getStringExtra("sampleImage");
+        Log.i(TAG, imageUrl);
+
+        Glide.with(this)
+                .load(imageUrl)
+                .into(imageView);
+
+        Glide.with(this)
+                .load(imageUrl)
+                .transform(new MultiTransformation<Bitmap>(new BlurTransformation(150), new BrightnessFilterTransformation((float) -0.4)))
+                .into(new CustomTarget<Drawable>() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        scrollView.setBackground(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
+
+        btnReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent (getApplicationContext(), ReviewActivity.class);
+                i.putExtra("imageUrl", imageUrl);
+                startActivity(i);
+            }
+        });
 
         Comic comic= Parcels.unwrap(getIntent().getParcelableExtra("comic"));
 
@@ -82,10 +134,15 @@ public class ComicDetailActivity extends AppCompatActivity {
                 try {
                     tvTitle.setText(object.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("title"));
                     tvPublished.setText(object.getJSONObject("data").getJSONArray("results").getJSONObject(0).getString("modified"));
-//                    imageName = imagePath + "/portrait_xlarge" + "." + imageExtension;
-                    Glide.with(ComicDetailActivity.this)
-                            .load(comic.url)
-                            .into(imageView);
+                    String imagePath = object.getJSONObject("data").getJSONArray("results").getJSONObject(0)
+                            .getJSONArray("images").getJSONObject(0).getString("path");
+                    String imageExtension = object.getJSONObject("data").getJSONArray("results").getJSONObject(0)
+                            .getJSONArray("images").getJSONObject(0).getString("extension");
+                    imageName = imagePath + "/portrait_xlarge" + "." + imageExtension;
+                    Log.i("test", imageName);
+                    /* Glide.with(ComicDetailActivity.this)
+                            .load("http://i.annihil.us/u/prod/marvel/i/mg/a/10/619e637b7fe1f/portrait_xlarge.jpg")
+                            .into(imageView); */
 
                     JSONArray creators = object.getJSONObject("data").getJSONArray("results").getJSONObject(0)
                             .getJSONObject("creators").getJSONArray("items");
