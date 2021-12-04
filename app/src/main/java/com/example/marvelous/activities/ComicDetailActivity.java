@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,11 +36,13 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 import com.example.marvelous.models.Comic;
 import com.example.marvelous.models.UserComic;
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +52,7 @@ import org.parceler.Parcels;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
@@ -70,6 +75,9 @@ public class ComicDetailActivity extends AppCompatActivity {
     Button btnStatus;
 
     UserComic userComic;
+    public Comic comic;
+    ParseUser currentUser = ParseUser.getCurrentUser();
+    boolean added;
 
     public static final String TAG = "ComicDetailActivity";
 
@@ -87,7 +95,7 @@ public class ComicDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Comic comic = Parcels.unwrap(getIntent().getParcelableExtra("comic"));
+        comic = Parcels.unwrap(getIntent().getParcelableExtra("comic"));
         setContentView(R.layout.comic_detail);
 
         userComic = new UserComic();
@@ -108,6 +116,9 @@ public class ComicDetailActivity extends AppCompatActivity {
         imageUrl = comic.url;
         Log.i(TAG, imageUrl);
 
+        makeRequest();
+
+        //METHOD FOR CHANGING STATUS AND ADDS TO LIBRARY IF NOT INSIDE ALREADY
         btnStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,18 +133,53 @@ public class ComicDetailActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         btnStatus.setText(item.getTitle());
-                        userComic.setStatus(item.getTitle().toString());
-                        userComic.setComicId(Integer.parseInt(comic.id));
-                        userComic.saveInBackground();
+
+                        ParseQuery<UserComic> query = ParseQuery.getQuery("UserComic");
+                        query.whereEqualTo(UserComic.KEY_USERID, ParseUser.getCurrentUser());
+                        query.findInBackground(new FindCallback<UserComic>() {
+                            @Override
+                            public void done(List<UserComic> comics, ParseException e) {
+                                if (e != null) {
+                                    Log.e(TAG, "Issue with getting posts", e);
+                                    return;
+                                }
+                                    Log.i(TAG, "Status set");
+                                for (int i = 0; i < comics.size(); i++){
+                                    Log.i(TAG, "COMIC " + comics.get(i).getComicId());
+                                    if (comics.get(i).getComicId() == Integer.parseInt(comic.id)){
+                                        added = true;
+                                        ParseQuery<ParseObject> query2 = ParseQuery.getQuery("UserComic");
+                                         query2.getInBackground(comics.get(i).getObjectId(), new GetCallback<ParseObject>() {
+                                             @Override
+                                             public void done(ParseObject object, ParseException e) {
+                                                 if (e == null) {
+                                                     object.put("status", item.getTitle().toString());
+                                                     object.saveInBackground();
+                                                 } else {
+                                                     // something went wrong
+                                                     Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                 }
+                                             }
+                                         });
+                                    }
+                                }
+                                if (!added){
+                                    userComic.setUserId(currentUser);
+                                    userComic.setComicId(Integer.parseInt(comic.id));
+                                    userComic.setStatus(item.getTitle().toString());
+                                    saveUserComic(userComic);
+                                }
+                            }
+                        });
                         return true;
                     }
                 });
-
                 popup.show();
             }
         });
 
         btnBookmark.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
 
@@ -158,10 +204,9 @@ public class ComicDetailActivity extends AppCompatActivity {
         btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Creates new user if doesn't find comicId
-                userComic.setComicId(Integer.parseInt(comic.id));
-                userComic.setUserId(ParseUser.getCurrentUser());
+//                // Creates new user if doesn't find comicId
+//                userComic.setComicId(Integer.parseInt(comic.id));
+//                userComic.setUserId(ParseUser.getCurrentUser());
 
                 if (userComic.getIsFavorite() == true) {
                     userComic.setIsFavorite(false);
@@ -169,11 +214,74 @@ public class ComicDetailActivity extends AppCompatActivity {
                 else {
                     userComic.setIsFavorite(true);
                 }
-
                 userComic.saveInBackground();
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // REQUEST_CODE is defined above
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+            int pageNumber = Integer.valueOf(data.getExtras().getString("pageNumber"));
+            btnBookmark.setText( pageNumber + "/" + userComic.getTotalPages());
+        }
+    }
+
+    private void initializeBtnFavorite(UserComic userComic) {
+        if (userComic.getIsFavorite() == true) {
+            btnFavorite.setChecked(true);
+        }
+        else {
+            btnFavorite.setChecked(false);
+        }
+    }
+
+    public static String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
+        }
+
+    private void saveUserComic(UserComic userComic){
+        userComic.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null){
+                    Log.e(TAG, "Error while saving" + e.getMessage(), e);
+                    Toast.makeText(getApplicationContext(), "Error while saving", Toast.LENGTH_SHORT).show();
+                }
+                Log.i(TAG, "Comic saved");
+                Toast.makeText(getApplicationContext(), "Comic added", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void makeRequest() {
+
+        // START MARVEL API
         RequestQueue queue = Volley.newRequestQueue(ComicDetailActivity.this);
         String id = "89680";
         String url = base_url + "comics" + "/" + comic.id + "?ts=" + TS + "&apikey=" + PUBLIC_KEY + "&hash=" + HASH;
@@ -244,50 +352,7 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
+        // END MARVEL API
+
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        // REQUEST_CODE is defined above
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            // Extract name value from result extras
-            int pageNumber = Integer.valueOf(data.getExtras().getString("pageNumber"));
-            btnBookmark.setText( pageNumber + "/" + userComic.getTotalPages());
-        }
-    }
-
-    private void initializeBtnFavorite(UserComic userComic) {
-        if (userComic.getIsFavorite() == true) {
-            btnFavorite.setChecked(true);
-        }
-        else {
-            btnFavorite.setChecked(false);
-        }
-    }
-
-    public static String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-        }
 }

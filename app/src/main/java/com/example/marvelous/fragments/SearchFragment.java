@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -115,6 +116,12 @@ public class SearchFragment extends Fragment{
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        super.onActivityCreated(savedInstanceState);
     }
 
     public  void searchComic(){

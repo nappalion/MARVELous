@@ -30,8 +30,7 @@
         android:layout_height="110dp"
         android:padding="5dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@android:drawable/btn_default_small"
-        tools:srcCompat="@android:drawable/btn_default_small" />
+        app:srcCompat="@drawable/comic_placeholder" />
 
     <TextView
         android:id="@+id/tvDescription"

@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -135,6 +136,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 }
             });
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        super.onActivityCreated(savedInstanceState);
     }
 
 
