@@ -11,25 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="200sp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="70sp"
         android:layout_marginLeft="15sp"
+        android:layout_marginTop="70sp"
         android:layout_marginRight="15sp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
         app:counterEnabled="true"
         app:counterMaxLength="150"
-        app:hintEnabled="false"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+        app:hintEnabled="false">
 
         <EditText
             android:id="@+id/etBio"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/text_bubble"
             android:layout_weight="1"
+            android:background="@drawable/text_bubble"
             android:gravity="top|left"
             android:hint="Add your bio here."
-            android:padding="30sp"
-            android:maxLength="160"/>
+            android:maxLength="160"
+            android:padding="30sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

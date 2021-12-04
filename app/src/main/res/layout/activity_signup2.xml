@@ -34,17 +34,17 @@
         android:id="@+id/btnContinue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:layout_marginRight="120sp"
-        android:layout_marginLeft="120sp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/tvAddProfile"
-        android:text="Continue"
-        android:textSize="15sp"
-        android:minHeight="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="120sp"
+        android:layout_marginTop="20sp"
+        android:layout_marginRight="120sp"
         android:background="@drawable/login_button"
-        android:textStyle="bold"
-        android:textColor="@color/white" />
+        android:minHeight="0dp"
+        android:text="Continue"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivSignupBackground"

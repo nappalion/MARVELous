@@ -19,13 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Reading"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:includeFontPadding="false"
+                android:textColor="#171717"
                 android:textSize="20sp"
-                android:layout_weight="1"/>
+                tools:text="Reading" />
             <ImageView
                 android:id="@+id/ivArrow"
                 android:layout_width="match_parent"
