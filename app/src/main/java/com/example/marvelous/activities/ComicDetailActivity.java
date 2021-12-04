@@ -30,10 +30,13 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.marvelous.R;
 import com.example.marvelous.models.Comic;
+import com.example.marvelous.models.utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,14 +63,14 @@ public class ComicDetailActivity extends AppCompatActivity {
 
     public static final String TAG = "ComicDetailActivity";
 
-    final String PUBLIC_KEY = "685c68298103e0c7ba2d074f58a4619b";
-    final String PRIVATE_KEY = "3b9af090798ac35d9d1176e212ed8c9451c30c9c";
+    final String PUBLIC_KEY = "e41392554937e06b7c0df85685a59a85d29fb39e";
+    final String PRIVATE_KEY = "c8182fb1665b70810b8649dda410f450";
 
     Date date = new Date();
     long timeMilli = date.getTime();
     String TS = (String.valueOf(timeMilli));
     String hashConvert = TS + PRIVATE_KEY + PUBLIC_KEY;
-    String HASH = md5(hashConvert);
+    String HASH = utils.generateMD5Hash(hashConvert);
 
     String base_url ="https://gateway.marvel.com:443/v1/public/";
     String imageName;
@@ -87,42 +90,11 @@ public class ComicDetailActivity extends AppCompatActivity {
         btnReview = findViewById(R.id.btnReview);
         scrollView = findViewById(R.id.scrollView);
 
-        imageUrl = getIntent().getStringExtra("sampleImage");
-        Log.i(TAG, imageUrl);
-
-        Glide.with(this)
-                .load(imageUrl)
-                .into(imageView);
-
-        Glide.with(this)
-                .load(imageUrl)
-                .transform(new MultiTransformation<Bitmap>(new BlurTransformation(150), new BrightnessFilterTransformation((float) -0.4)))
-                .into(new CustomTarget<Drawable>() {
-                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-                    @Override
-                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                        scrollView.setBackground(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                    }
-                });
-
-        btnReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent (getApplicationContext(), ReviewActivity.class);
-                i.putExtra("imageUrl", imageUrl);
-                startActivity(i);
-            }
-        });
 
         Comic comic= Parcels.unwrap(getIntent().getParcelableExtra("comic"));
 
         RequestQueue queue = Volley.newRequestQueue(ComicDetailActivity.this);
-        String id = "89680";
+        int id = comic.getId();
         String url = base_url + "comics" + "/" + comic.id + "?ts=" + TS + "&apikey=" + PUBLIC_KEY + "&hash=" + HASH;
 
         Log.i("URL", url);
@@ -171,5 +143,39 @@ public class ComicDetailActivity extends AppCompatActivity {
             }
         });
         queue.add(request);
+
+
+//        imageUrl = getIntent().getStringExtra("sampleImage");
+        //Log.i(TAG, imageUrl);
+
+        tvTitle.setText(comic.getTitle());
+        tvDescription.setText(comic.getDescription());
+        Glide.with(this).load(comic.url)
+                .transform(new CenterInside(), new RoundedCorners(35)).into(imageView);
+
+        Glide.with(this)
+                .load(imageUrl)
+                .transform(new MultiTransformation<Bitmap>(new BlurTransformation(150), new BrightnessFilterTransformation((float) -0.4)))
+                .into(new CustomTarget<Drawable>() {
+                    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        scrollView.setBackground(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
+
+        btnReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent (getApplicationContext(), ReviewActivity.class);
+                i.putExtra("imageUrl", imageUrl);
+                startActivity(i);
+            }
+        });
     }
 }

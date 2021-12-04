@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.marvelous.R;
 import com.example.marvelous.activities.ComicDetailActivity;
 import com.example.marvelous.activities.ReviewActivity;
@@ -88,10 +90,11 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
         }
 
         public void bind(UserComic userComic) {
-            ParseFile sampleImage = userComic.getSampleImage();
+            String comicImage = userComic.getComicImagelink();
             // Log.i(TAG, "Bind called");
-            if (sampleImage != null) {
-                Glide.with(context).load(sampleImage.getUrl()).into(ivComic);
+            if (comicImage != null) {
+                Glide.with(context).load(userComic.getComicImagelink())
+                        .transform(new CenterInside(), new RoundedCorners(35)).into(ivComic);
                 // Log.i(TAG, "ivComic");
             }
             else {
@@ -115,7 +118,7 @@ public class LibraryComicsAdapter extends RecyclerView.Adapter<LibraryComicsAdap
 
                     // Review Activity
                     Intent i = new Intent (context, ComicDetailActivity.class);
-                    i.putExtra("sampleImage", sampleImage.getUrl());
+                    i.putExtra("comicImageLink", comicImage);
                     context.startActivity(i);
                 }
             });

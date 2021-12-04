@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2sp"
                 android:textSize="15sp"
-                tools:text="3.23" />'
+                tools:text="3.23" />
 
             <ImageView
                 android:id="@+id/ivBookmark"
