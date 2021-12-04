@@ -139,8 +139,8 @@
                             android:id="@+id/lblCoverArtist"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Jung-Geun Yoon"
-                            android:textColor="@color/white"/>
+                            android:text="Unspecified"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -259,13 +259,13 @@
             android:id="@+id/lblDescription"
             android:layout_width="match_parent"
             android:layout_height="200sp"
+            android:layout_marginLeft="10sp"
             android:layout_marginTop="10sp"
             android:layout_marginRight="10sp"
-            android:layout_marginLeft="10sp"
             android:layout_marginBottom="30sp"
-            android:text="Jung-Geun Yoon"
-            android:textColor="@color/white"
-            android:background="@drawable/black_transparent_rectangle"/>
+            android:background="@drawable/black_transparent_rectangle"
+            android:text="Description"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </ScrollView>
