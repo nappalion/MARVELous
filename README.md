@@ -6,12 +6,16 @@ Group members: **Robert Balatbat, Babak Shajari, Nhat Tran, Napoleon Torrico**
 # MARVELous
 
 ## Table of Contents
+1. Final Product
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
 
 ## Overview
+### Final Product
+<img src="FinalGif.gif" width=400>
+
 ### Description
 "MARVELous" is a Marvel comic book reader powered by Marvel Comics API. Readers can navigate through their library, leave reviews of comics they have read, and much more. This app also features a social environment for like-minded comic book readers with the ability to follow accounts, view other readers' reviews, and even rate their reviews. Discover new comics with a built-in search feature that can filter for your favorite heroes, teams, and even villains. 
 
